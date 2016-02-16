@@ -1,0 +1,121 @@
+.breadcrumb {
+  padding: 8px 15px;
+  margin: 0 0 19px;
+  list-style: none;
+  background-color: #f5f5f5;
+  border-radius: 3px;
+  border: 1px solid #E5E5E5;
+}
+.breadcrumb > li {
+  display: inline-block;
+  text-shadow: 0 1px 0 #ffffff;
+}
+.breadcrumb > li > .divider {
+  padding: 0 5px;
+  color: #ccc;
+}
+.breadcrumb > .active {
+  color: #999999;
+}
+/*.entity-portrait-square {
+	float: none !important;
+}*/
+.entity-portrait-square img.actor-avatar.medium {
+	width: 64px;
+	height: auto;
+}
+.forum-category-list {
+	margin-bottom: 10px;
+}
+.forum-category-heading {
+	background-color: #F5F5F5;
+	border-radius: 3px 3px 0 0;
+}
+.forum-category-body {
+	background-color: #EFEFEF;
+	border-radius: 0 0 3px 3px;
+}
+.forum-thread-count, .forum-reply-count {
+    font-size: 22px;
+}
+div.entity-meta:empty {
+	display:none;
+}
+.forum-post-profile, .forum-post-body {
+	display: block;
+	min-height: 29px;
+	box-sizing: border-box;
+	float: left;
+}
+.forum-post-body .forum-post-title {
+	color: inherit;
+}
+.forum-post-body .entity-description {
+	min-height: 110px;
+}
+.forum-post-profile {
+	width: 20%;
+	min-width: 70px;
+	position: relative;
+	z-index: 1;
+}
+.forum-profile-banner {
+	height: 100px;
+	position: relative;
+	overflow: hidden;
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-radius: 3px 0 0 0;
+	background-color: #CCC;
+}
+.forum-profile-content {
+	min-height: 100px;
+	padding: 20px 20px 10px;
+	position: relative;
+	z-index: 3;
+}
+.forum-profile-content .forum-profile-author {
+	text-align: center;
+	margin-top: -65px;
+}
+.forum-profile-author a {
+	color: #000;
+}
+.forum-profile-author .actor-avatar {
+	max-width: 100px;
+	max-height: 100px;
+	border: 3px solid #FFF;
+}
+.forum-post-body {
+	width: 80%;
+}
+form.forum-quickreply-form {
+	padding-top: 10px;
+}
+.forum-folder-indicator {
+	text-align: center;
+}
+.forum-thread-icon {
+	/*height: 50px;
+	width: 50px;
+	background-position: center center;
+	background-size: 137% auto;
+	border-radius: 3px;*/
+	background-color: lightblue;
+}
+
+[class^="icon-post-"], [class*=" icon-post-"] {
+	background-image:url('../img/forum-icons.png');
+	background-repeat:no-repeat;
+	width:14px;
+	height:14px;
+	display: inline-block;
+    line-height: 14px;
+    vertical-align: text-top;
+}
+
+.icon-post-reply {background-position:0 0;}
+.icon-post-quickreply {background-position:0 -14px}
+.icon-post-quote {background-position:0 -28px}
+.icon-post-quickquote {background-position:0 -42px}

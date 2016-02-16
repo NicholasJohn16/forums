@@ -1,0 +1,421 @@
+// BASE BOOTSWATCH
+@font-face {
+  font-family: 'icomoon';
+  src:url('../../../../media/com_forums/fonts/icomoon.eot?yfr9pk');
+  src:url('../../../../media/com_forums/fonts/icomoon.eot?yfr9pk#iefix') format('embedded-opentype'),
+    url('../../../../media/com_forums/fonts/icomoon.ttf?yfr9pk') format('truetype'),
+    url('../../../../media/com_forums/fonts/icomoon.woff?yfr9pk') format('woff'),
+    url('../../../../media/com_forums/fonts/icomoon.svg?yfr9pk#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.sceditor-container {
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  position: relative;
+}
+.sceditor-container iframe {
+  padding: 5px;
+  margin-bottom: -5px;
+  border-radius: 0 0 3px 3px;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+}
+.sceditor-container textarea {
+  border-radius: 0 0 3px 3px;
+  border: none;
+  margin-bottom: 0;
+}
+.sceditor-container.focus iframe, .sceditor-container.focus textarea {
+  border: 1px solid rgba(82,168,236,0.8);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+}
+.sceditor-container.error iframe {
+  border:1px solid #e9322d;
+  box-shadow: 0 0 6px #f8b9b7;
+}
+// Maximized Editor
+.sceditor-maximize {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100% !important;
+  width: 100% !important;
+  border-radius: 0px;
+  z-index: 2000;
+}
+.sceditor-maximize div.sceditor-grip {
+  display: none;
+}
+.sceditor-maximize div.sceditor-toolbar {
+  border-radius: 0px;
+}
+div.sceditor-grip {
+  overflow: hidden;
+  width: 100%;
+  height: 5px;
+  cursor: row-resize;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+}
+div.sceditor-resize-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  opacity: 0.3;
+}
+
+// Make the div behave like a button
+.sceditor-group {
+  position: relative;
+  display: inline-block;
+  .ie7-inline-block();
+  font-size: 0; // remove as part 1 of font-size inline-block hack
+  vertical-align: middle; // match .sceditor-button alignment given font-size hack above
+  white-space: nowrap; // prevent buttons from wrapping when in tight spaces (e.g., the table on the tests page)
+  .ie7-restore-left-whitespace();
+}
+
+// Space out series of button groups
+.sceditor-group + .sceditor-group {
+  margin-left: 5px;
+}
+
+// Optional: Group multiple button groups together for a toolbar
+.sceditor-toolbar {
+  background-color: @grayLighter;
+  padding: 5px;
+  border-radius: 2px 2px 0 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 0; // Hack to remove whitespace that results from using inline-block
+  //margin-top: @baseLineHeight / 2;
+  //margin-bottom: @baseLineHeight / 2;
+  > .sceditor-button + .sceditor-button,
+  > .sceditor-group + .sceditor-button,
+  > .sceditor-button + .sceditor-group {
+    margin-left: 5px;
+  }
+}
+
+// Float them, remove border radius, then re-add to first and last elements
+.sceditor-group > .sceditor-button {
+  position: relative;
+  .border-radius(0);
+}
+.sceditor-group > .sceditor-button + .sceditor-button {
+  margin-left: -1px;
+}
+.sceditor-group > .sceditor-button,
+.sceditor-group > .dropdown-menu,
+.sceditor-group > .popover {
+  font-size: @baseFontSize; // redeclare as part 2 of font-size inline-block hack
+}
+
+// Reset fonts for other sizes
+.sceditor-group > .sceditor-button-mini {
+  font-size: @fontSizeMini;
+}
+.sceditor-group > .sceditor-button-small {
+  font-size: @fontSizeSmall;
+}
+.sceditor-group > .sceditor-button-large {
+  font-size: @fontSizeLarge;
+}
+
+// Set corners individual because sometimes a single button can be in a .sceditor-group and we need :first-child and :last-child to both match
+.sceditor-group > .sceditor-button:first-child {
+  margin-left: 0;
+  .border-top-left-radius(@baseBorderRadius);
+  .border-bottom-left-radius(@baseBorderRadius);
+}
+// Need .dropdown-toggle since :last-child doesn't apply given a .dropdown-menu immediately after it
+.sceditor-group > .sceditor-button:last-child,
+.sceditor-group > .dropdown-toggle {
+  .border-top-right-radius(@baseBorderRadius);
+  .border-bottom-right-radius(@baseBorderRadius);
+}
+// Reset corners for large buttons
+.sceditor-group > .sceditor-button.large:first-child {
+  margin-left: 0;
+  .border-top-left-radius(@borderRadiusLarge);
+  .border-bottom-left-radius(@borderRadiusLarge);
+}
+.sceditor-group > .sceditor-button.large:last-child,
+.sceditor-group > .large.dropdown-toggle {
+  .border-top-right-radius(@borderRadiusLarge);
+  .border-bottom-right-radius(@borderRadiusLarge);
+}
+
+// On hover/focus/active, bring the proper btn to front
+.sceditor-group > .sceditor-button:hover,
+.sceditor-group > .sceditor-button:focus,
+.sceditor-group > .sceditor-button:active,
+.sceditor-group > .sceditor-button.active {
+  z-index: 2;
+}
+
+// On active and open, don't show outline
+.sceditor-group .dropdown-toggle:active,
+.sceditor-group.open .dropdown-toggle {
+  outline: 0;
+}
+
+
+
+// Split button dropdowns
+// ----------------------
+
+// Give the line between buttons some depth
+.sceditor-group > .sceditor-button + .dropdown-toggle {
+  padding-left: 8px;
+  padding-right: 8px;
+  .box-shadow(~"inset 1px 0 0 rgba(255,255,255,.125), inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
+  *padding-top: 5px;
+  *padding-bottom: 5px;
+}
+.sceditor-group > .sceditor-button-mini + .dropdown-toggle {
+  padding-left: 5px;
+  padding-right: 5px;
+  *padding-top: 2px;
+  *padding-bottom: 2px;
+}
+.sceditor-group > .sceditor-button-small + .dropdown-toggle {
+  *padding-top: 5px;
+  *padding-bottom: 4px;
+}
+.sceditor-group > .sceditor-button-large + .dropdown-toggle {
+  padding-left: 12px;
+  padding-right: 12px;
+  *padding-top: 7px;
+  *padding-bottom: 7px;
+}
+
+.sceditor-group.open {
+
+  // The clickable button for toggling the menu
+  // Remove the gradient and set the same inset shadow as the :active state
+  .dropdown-toggle {
+    background-image: none;
+    .box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
+  }
+
+  // Keep the hover's background when dropdown is open
+  .sceditor-button.dropdown-toggle {
+    background-color: @btnBackgroundHighlight;
+  }
+  .sceditor-button-primary.dropdown-toggle {
+    background-color: @btnPrimaryBackgroundHighlight;
+  }
+  .sceditor-button-warning.dropdown-toggle {
+    background-color: @btnWarningBackgroundHighlight;
+  }
+  .sceditor-button-danger.dropdown-toggle {
+    background-color: @btnDangerBackgroundHighlight;
+  }
+  .sceditor-button-success.dropdown-toggle {
+    background-color: @btnSuccessBackgroundHighlight;
+  }
+  .sceditor-button-info.dropdown-toggle {
+    background-color: @btnInfoBackgroundHighlight;
+  }
+  .sceditor-button-inverse.dropdown-toggle {
+    background-color: @btnInverseBackgroundHighlight;
+  }
+}
+
+
+// Reposition the caret
+.sceditor-button .caret {
+  margin-top: 8px;
+  margin-left: 0;
+}
+// Carets in other button sizes
+.sceditor-button-large .caret {
+  margin-top: 6px;
+}
+.sceditor-button-large .caret {
+  border-left-width:  5px;
+  border-right-width: 5px;
+  border-top-width:   5px;
+}
+.sceditor-button-mini .caret,
+.sceditor-button-small .caret {
+  margin-top: 8px;
+}
+// Upside down carets for .dropup
+.dropup .sceditor-button-large .caret {
+  border-bottom-width: 5px;
+}
+
+
+
+// Account for other colors
+.sceditor-button-primary,
+.sceditor-button-warning,
+.sceditor-button-danger,
+.sceditor-button-info,
+.sceditor-button-success,
+.sceditor-button-inverse {
+  .caret {
+    border-top-color: @white;
+    border-bottom-color: @white;
+  }
+}
+
+
+
+// Vertical button groups
+// ----------------------
+
+.sceditor-group-vertical {
+  display: inline-block; // makes buttons only take up the width they need
+  .ie7-inline-block();
+}
+.sceditor-group-vertical > .sceditor-button {
+  display: block;
+  float: none;
+  max-width: 100%;
+  .border-radius(0);
+}
+.sceditor-group-vertical > .sceditor-button + .sceditor-button {
+  margin-left: 0;
+  margin-top: -1px;
+}
+.sceditor-group-vertical > .sceditor-button:first-child {
+  .border-radius(@baseBorderRadius @baseBorderRadius 0 0);
+}
+.sceditor-group-vertical > .sceditor-button:last-child {
+  .border-radius(0 0 @baseBorderRadius @baseBorderRadius);
+}
+.sceditor-group-vertical > .sceditor-button-large:first-child {
+  .border-radius(@borderRadiusLarge @borderRadiusLarge 0 0);
+}
+.sceditor-group-vertical > .sceditor-button-large:last-child {
+  .border-radius(0 0 @borderRadiusLarge @borderRadiusLarge);
+}
+
+
+// Buttons
+.sceditor-button {
+  .btn();
+  padding: 3px 6px;
+}
+a.sceditor-button {
+  //.btn-mini();
+}
+[class^="sceditor-button-"] div, [class*=" sceditor-button-"] div{
+    /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  //line-height: 1;
+
+  text-indent: -9999px;
+  line-height: 0px;
+
+  color: transparent;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[class^="sceditor-button-"] div:after, [class*=" sceditor-button-"] div:after {
+  text-indent: 0;
+  color: black;
+  display: block;
+  line-height: 1;
+}
+.sceditor-button-bold div:after { content: "\f032";}
+.sceditor-button-italic div:after { content: "\f033";}
+.sceditor-button-underline div:after { content: "\f0cd";}
+.sceditor-button-strike div:after { content: "\f0cc";}
+.sceditor-button-subscript div:after { content: "\f12c";}
+.sceditor-button-superscript div:after {content: "\f12b";}
+.sceditor-button-left div:after { content: "\f036";}
+.sceditor-button-center div:after { content: "\f037";}
+.sceditor-button-right div:after { content: "\f038";}
+.sceditor-button-justify div:after { content: "\f039";}
+.sceditor-button-font div:after { content: "\f031";}
+.sceditor-button-size div:after { content: "\f034";}
+.sceditor-button-color div:after { content: "\f02c";}
+.sceditor-button-removeformat div:after { content: "\f12d";}
+.sceditor-button-bulletlist div:after { content: "\f0ca";}
+.sceditor-button-orderedlist div:after { content: "\f0cb";}
+.sceditor-button-indent div:after { content: "\f03c";}
+.sceditor-button-outdent div:after { content: "\f03b";}
+.sceditor-button-table div:after { content: "\f0ce";}
+.sceditor-button-code div:after { content: "\f121";}
+.sceditor-button-quote div:after { content: "\f075";}
+.sceditor-button-image div:after { content: "\f03e";}
+.sceditor-button-link div:after { content: "\f0c1";}
+.sceditor-button-unlink div:after { content: "\f127";}
+.sceditor-button-maximize div:after {content: "\f065";}
+.sceditor-button-maximize.active div:after {content: "\f066";}
+.sceditor-button-source div:after { content: "\f1c9";}
+.sceditor-button-cut div:after { content: "\f0c4";}
+.sceditor-button-copy div:after { content: "\f0c5";}
+.sceditor-button-paste div:after { content: "\f0ea";}
+.sceditor-button-pastetext div:after { content: "\f0ea";}
+.sceditor-button-horizontalrule div:after { content: "\f068";}
+.sceditor-button-email div:after { content: "\f003";}
+.sceditor-button-emoticon div:after { content: "\f118";}
+.sceditor-button-youtube div:after { content: "\f167";}
+.sceditor-button-date div:after { content: "\f073";}
+.sceditor-button-time div:after { content: "\f017";}
+.sceditor-button-ltr div:after { content: "\f191";}
+.sceditor-button-rtl div:after { content: "\f152";}
+.sceditor-button-print div:after { content: "\f02f";}
+.sceditor-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  min-width: 160px;
+  padding: 5px;
+  margin: 2px 0 0;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,0.2);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+.sceditor-color-column {
+  float: left;
+}
+.sceditor-color-option {
+  display: block;
+  border: 1px solid #fff;
+  height: 10px;
+  width: 10px;
+  overflow: hidden;
+}
+.sceditor-color-option:hover {
+  border: 1px solid #333;
+}
+.sceditor-font-option, .sceditor-fontsize-option {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: @baseLineHeight;
+  color: @dropdownLinkColor;
+  white-space: nowrap;
+}
