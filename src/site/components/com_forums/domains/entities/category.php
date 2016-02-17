@@ -11,9 +11,10 @@ class ComForumsDomainEntityCategory extends ComBaseDomainEntityNode {
 			),
 			'relationships' => array('forums'),
 			'behaviors' => array(
-				'parentable' => array('parent' => 'forum'),
 				'authorizer',
 				'describable',
+				'orderable',
+				'parentable' => array('parent' => 'forum'),
 				'privatable'
 				)
 			));

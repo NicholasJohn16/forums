@@ -8,7 +8,8 @@
     </div>
     <div class="accordion-body forum-category-body">
         <div class="accordion-inner">
-            <?php foreach ($category->forums as $forum): ?>
+            <?php $forums = $category->forums->order('ordering') ?>
+            <?php foreach ($forums as $forum): ?>
                 <?= @view('forum')->layout('list')->forum($forum) ?>
             <?php endforeach; ?>
         </div>

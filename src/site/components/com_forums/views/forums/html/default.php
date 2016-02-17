@@ -12,7 +12,7 @@
 
 <div class="accordion">
     <?php foreach ($categories as $category): ?>
-        <?php if (empty($forum->parent)): ?>
+        <?php if (empty($category->parent)): ?>
             <?= @view('category')->layout('list')->category($category) ?>
         <?php endif; ?>
     <?php endforeach; ?>

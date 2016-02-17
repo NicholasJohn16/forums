@@ -13,7 +13,7 @@ class ComForumsControllerForum extends ComBaseControllerService {
         
         $config->append(array(
             'request' => array(
-                'sort' => 'ordering'
+                'order' => 'ordering'
             ),
             'behaviors' => array(
                 'parentable',
@@ -41,15 +41,17 @@ class ComForumsControllerForum extends ComBaseControllerService {
         $viewer->save();
     }
 
-    // public function _actionBrowse($context)
-    // {
+    public function _actionBrowse($context)
+    {
     //     $session = Kservice::get('com://site/people.controller.session');
     //     $viewer = get_viewer();
 
     //     $session = JFactory::getSession();
 
-    //     parent::_actionBrowse($context);
-    // }
+        $this->categories = KService::get('repos://site/forums.category')->getQuery()->order('ordering')->fetchSet();
+
+        parent::_actionBrowse($context);
+    }
     
     public function _actionRead($context) {
         $limit = ($context->request->limit) ? $context->request->limit : 20;

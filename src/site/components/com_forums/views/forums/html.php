@@ -2,11 +2,11 @@
 
 class ComForumsViewForumsHtml extends ComBaseViewHtml {
     
-    protected function _layoutDefault() {
+    // protected function _layoutDefault() {
         
-        $this->categories = KService::get('repos://site/forums.category')->fetchSet();
+    //     $this->categories = KService::get('repos://site/forums.category')->fetchSet();
 
-    }
+    // }
     
     protected function findChildren($parent,$forums) {
         $parent->set('children',array());
