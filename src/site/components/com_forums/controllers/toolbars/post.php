@@ -96,7 +96,7 @@ class ComForumsControllerToolbarPost extends ComBaseControllerToolbarDefault {
         $entity = $this->getController()->getItem();
 
         if($entity->author) {
-            $openTag = '[quote="'.$entity->author->name.'"';
+            $openTag = '[quote="'.$entity->author->username.'"';
         } else {
             $openTag = '[quote';
         }

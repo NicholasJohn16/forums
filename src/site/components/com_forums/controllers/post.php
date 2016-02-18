@@ -22,7 +22,8 @@
                     'com://site/stories.controller.behavior.publisher',
                     'com://site/notifications.controller.behavior.notifier',
                     'com://site/hashtags.controller.behavior.hashtagable',
-                    'com://site/people.controller.behavior.mentionable'
+                    'com://site/people.controller.behavior.mentionable',
+                    'ownable' => array('default' => get_viewer())
                 )
              ));
 
@@ -44,7 +45,7 @@
                     ->getQuery()
                     ->where('id', '=', $this->qid)
                     ->fetch();
-                $this->body = '[quote="'.$quote->author->name.'" post='.$quote->id.']'.$quote->body."[/quote]\n\n";
+                $this->body = '[quote="'.$quote->author->username.'" post='.$quote->id.']'.$quote->body."[/quote]\n\n";
             }
 
             if(!$layout) {
@@ -58,7 +59,7 @@
         public function _actionEdit($context)
         {
             $post = $this->getItem();
-            
+
             if($post->parent->id !== $context->data->pid && get_viewer()->admin()) {
 
                 $originalParent = $post->parent;
@@ -107,10 +108,10 @@
             } else {
                 $context->data->pid = $post->parent->id;
             }
-            
+
             parent::_actionEdit($context);
             $post->load(array('parent'));
-            
+
             $this->getResponse()->setRedirect(JRoute::_($post->parent->getURL()));
         }
 
@@ -120,7 +121,8 @@
             $context->data->author = get_viewer();
             $this->parent->resetRead();
 
-            parent::_actionAdd($context);
+            $post = parent::_actionAdd($context);
+
         }
 
         public function _actionDelete($context)
@@ -140,6 +142,7 @@
         public function createStoryCallback(KCommandContext $context)
         {
             $post = $this->getItem();
+
 
             if($context->result !== false ) {
 
