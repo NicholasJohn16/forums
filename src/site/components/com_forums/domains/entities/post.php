@@ -47,9 +47,15 @@ class ComForumsDomainEntityPost extends ComBaseDomainEntityNode {
         $behavior->setLastReply($this->parent->parent, $this);
     }
 
-    protected function _afterEntityDelete(KCommandContext $context)
+    protected function _beforeEntityDelete(KCommandContext $context)
     {
+        error_log('entity deleted');
+        error_log('entity title: '.$this->title);
         $behavior = $this->getService('repos://site/forums.thread')->getBehavior('repliable');
+
+        error_log(get_class($behavior));
+        error_log('parent title: '.$this->parent->title);
+
         $behavior->decrementPostCount($this->parent);
         $behavior->decrementPostCount($this->parent->parent);
         $behavior->resetLastReply($this->parent);

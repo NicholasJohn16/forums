@@ -35,7 +35,7 @@
 	background-color: #EFEFEF;
 	border-radius: 0 0 3px 3px;
 }
-.forum-thread-count, .forum-reply-count {
+.forum-stat-count {
     font-size: 22px;
 }
 div.entity-meta:empty {

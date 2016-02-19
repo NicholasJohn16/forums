@@ -25,12 +25,12 @@
     </div>
 
     <div class="media-body span1 text-center">
-        <div class="forum-thread-count"><?= @helper('humanize', $forum->getThreadCount()) ?></div>
+        <div class="forum-stat-count"><?= @helper('humanize', $forum->getThreadCount()) ?></div>
         <div><?= @text('COM-FORUMS-FORUM-THREADS-COUNT') ?></div>
     </div>
 
     <div class="media-body span1 text-center">
-        <div class="forum-reply-count"><?= @helper('humanize', $forum->getReplyCount()) ?></div>
+        <div class="forum-stat-count"><?= @helper('humanize', $forum->getReplyCount()) ?></div>
         <div><?= @text('COM-FORUMS-FORUM-REPLY-COUNT') ?></div>
     </div>
 

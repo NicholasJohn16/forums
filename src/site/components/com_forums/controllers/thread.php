@@ -7,20 +7,17 @@ class ComForumsControllerThread extends ComBaseControllerService
     {
 
         $config->append(array(
-            'request' => array(
-                // 'limit' => 10
-                // 'offset' => 0
-                ),
             'behaviors' => array(
                 'parentable',
                 'subscribable',
                 'pinnable',
                 'enablable',
+                'mentionable',
                 'lockable',
                 'com://site/stories.controller.behavior.publisher',
                 'com://site/notifications.controller.behavior.notifier',
-                'com://site/forums.controller.behavior.repliable',
-                'ownable' => array('default' => get_viewer())
+                'com://site/hashtags.controller.behavior.hashtagable',
+                'com://site/forums.controller.behavior.repliable'
             )
         ));
 
@@ -90,6 +87,8 @@ class ComForumsControllerThread extends ComBaseControllerService
                 ));
 
         $post->save();
+
+        $this->setItem($post);
 
         // $name = $context->data->name;
         $this->createStory(array(

@@ -22,12 +22,14 @@
         <p>Posted <span title="<?= $thread->creationTime->getDate() ?>"><?= @date($thread->creationTime) ?></span> by <?= @name($thread->author) ?></p>
     </div>
 
-    <div class="media-body span1">
-        <?= $thread->hits ?> Hits
+    <div class="media-body span1 text-center">
+        <div class="forum-stat-count"><?= @helper('humanize', $thread->hits) ?></div>
+        <div><?= @text('COM-FORUMS-THREAD-HIT-COUNT') ?></div>
     </div>
 
-    <div class="media-body span1">
-        <?= $thread->getReplyCount() ?> Replies
+    <div class="media-body span1 text-center">
+        <div class="forum-stat-count"><?= @helper('humanize', $thread->getReplyCount()) ?></div>
+        <div><?= @text('COM-FORUMS-THREAD-REPLY-COUNT') ?></div>
     </div>
 
     <?php if($thread->lastReply): ?>

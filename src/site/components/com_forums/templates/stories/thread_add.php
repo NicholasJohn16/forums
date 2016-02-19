@@ -9,6 +9,6 @@
 		<?= @link($object->parent) ?>
 	</h4>
 	<div class="entity-body">
-		<?= @content(@helper('text.truncate', @escape($object->body), array('length'=>200, 'consider_html' => true)), array('exclude' => 'link', 'filter' => 'bbcode')); ?>
+		<?= @content(@helper('text.truncate', @escape($object->body), array('length'=>200, 'consider_html' => true)), array('exclude' => 'link')); ?>
 	</div>
 </data>
