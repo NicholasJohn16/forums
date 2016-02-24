@@ -125,19 +125,14 @@
 
         }
 
-        public function _actionDelete($context)
-        {
-            $post = $this->getItem();
-            $thread = $post->parent;
-            $url = $thread->getURL();
-
-            $post->delete();
-
-            if(!count($thread->posts)) {
-                $url = $thread->parent->getURL();
-                $thread->delete();
-            }
-        }
+        // public function _actionDelete($context)
+        // {
+        //     $post = $this->getItem();
+        //     $thread = $post->parent;
+        //     $url = $thread->getURL();
+        //
+        //     $post->delete();
+        // }
 
         public function createStoryCallback(KCommandContext $context)
         {
