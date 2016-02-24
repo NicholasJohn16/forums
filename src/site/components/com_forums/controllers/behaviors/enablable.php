@@ -20,6 +20,7 @@ class ComForumsControllerBehaviorEnablable extends ComBaseControllerBehaviorEnab
 	        } else {
 	        	$context->response->status = KHttpResponse::NO_CONTENT;
 	        }
+
 	    }
 
 	    if($identifier === 'thread') {

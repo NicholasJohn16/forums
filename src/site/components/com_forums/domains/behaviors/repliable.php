@@ -71,14 +71,12 @@ class ComForumsDomainBehaviorRepliable extends AnDomainBehaviorAbstract
   }
 
     public function setLastReply($entity, $post) {
-    	error_log('setLastReply');
+    	
     	if($post) {
-    		error_log('isPost');
     		$entity->set('lastReply', $post);
     		$entity->set('lastReplier', $post->author);
     		$entity->set('lastReplyTime', $post->creationTime);
     	} else {
-    		error_log('notPost');
     		$entity->set('lastReply', null);
     		$entity->set('lastReplier', null);
     		$entity->set('lastReplyTime', null);
@@ -88,14 +86,10 @@ class ComForumsDomainBehaviorRepliable extends AnDomainBehaviorAbstract
     public function resetLastReply($entity) {
 
     	if($entity->getIdentifier()->name === 'thread') {
-
     		$lastReply = $entity->posts->reset()->order('creationTime', 'DESC')->fetch();
+    	}
 
-    		error_log("count lastReply:". count($lastReply));
-    		error_log('last reply id:'. $lastReply->id);
-
-    	} elseif($entity->getIdentifier()->name === 'forum') {
-
+    	if($entity->getIdentifier()->name === 'forum') {
     		$thread = $entity->threads->reset()->order('lastReplyTime', 'DESC')->fetch();
     		$lastReply = $thread->posts->order('creationTime', 'DESC')->fetch();
     	}
@@ -113,59 +107,20 @@ class ComForumsDomainBehaviorRepliable extends AnDomainBehaviorAbstract
 	}
 
 	public function recountStatsFor($entity) {
-		$threadIds = $entity->threads->reset()->select('id')->fetchValues('id');
-		$threadCount = count($threadIds);
-		$postCount = $this->getService('repos://site/forums.post')->getQuery()->where('parent_id', 'IN', $threadIds)->fetchValue('COUNT(id)');
 
-		$entity->setValue('threadCount', $threadCount);
-		$entity->setValue('postCount', $postCount);
+		if($entity->getIdentifier()->name == 'forum') {
+			$threadIds = $entity->threads->reset()->select('id')->fetchValues('id');
+			$threadCount = count($threadIds);
+			$postCount = $this->getService('repos://site/forums.post')->getQuery()->where('parent_id', 'IN', $threadIds)->fetchValue('COUNT(id)');
+
+			$entity->setValue('threadCount', $threadCount);
+			$entity->setValue('postCount', $postCount);
+		}
+
+		if($entity->getIdentifier()->name == 'thread') {
+			$postCount = $entity->posts->reset()->where('enabled','=','1')->getTotal();
+			$entity->setValue('postCount', $postCount);
+		}
 	}
-
-	// public function resetStats($entity)
-	// {
-
-	// 	if($entity && $entity->getIdentifier->name === 'thread') {
-
-	// 		$lastReply = $entity->posts->reset()->order('creationTime', 'DESC')->fetch();
-
-	// 		$entity->set('numOfReplies', $entity->posts->getTotal() - 1);
-	// 		$entity->set('lastReply', $lastReply);
-	// 		$entity->set('lastReplier', $lastReply->owner);
-	// 		$entity->set('lastReplyTime', $lastReply->creationTime);
-
-
-	// 	} elseif ($entity && $entity->getIdentifier->name === 'forum') {
-
-	// 		$threadCount = $entity->threads->getTotal();
-	// 		$threadIds = $entity->threads->reset()->select('id')->fetchValues('id');
-	// 		$postCount = $this->getService('repos:forums.post')->getQuery()->where('parent_id', 'IN', $threadIds)->fetchValue('COUNT(id)');
-
-	// 		$entity->set('lastReply', $lastReply);
-	// 		$entity->set('lastReplier', $lastReply->owner);
-	// 		$entity->set('lastReplyTime', $lastReply->creationTime);
-	// 		$entity->setNumOfThreads($threadCount);
-	// 		$entity->setNumOfReplies($postCount - $threadCount);
-	// 	}
-
-		// if($thread) {
-		// 	$lastReply = $thread->posts->reset()->order('creationTime', 'DESC')->fetch();
-
-		// 	$thread->set('numOfReplies', $thread->posts->getTotal() - 1);
-		// 	$thread->set('lastReply', $lastReply);
-		// 	$thread->set('lastReplier', $lastReply->owner);
-		// 	$thread->set('lastReplyTime', $lastReply->creationTime);
-		// }
-
-		// $threadCount = $forum->threads->getTotal();
-		// $threadIds = $forum->threads->reset()->select('id')->fetchValues('id');
-		// $postCount = $this->getService('repos:forums.post')->getQuery()->where('parent_id', 'IN', $threadIds)->fetchValue('COUNT(id)');
-
-		// $forum->set('lastReply', $lastReply);
-		// $forum->set('lastReplier', $lastReply->owner);
-		// $forum->set('lastReplyTime', $lastReply->creationTime);
-		// $forum->setNumOfThreads($threadCount);
-		// $forum->setNumOfReplies($postCount - $threadCount);
-
-	// }
 
 }

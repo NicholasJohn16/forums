@@ -47,6 +47,30 @@ class ComForumsDomainEntityPost extends ComBaseDomainEntityNode {
         $behavior->setLastReply($this->parent->parent, $this);
     }
 
+    protected function _afterEntityUpdate($context)
+    {
+        $modifications = $this->getModifiedData();
+
+        if($modifications->enabled && !$modifications->enabled->new) {
+            $thread = $this->parent;
+            $count = $thread->posts->reset()->where('enabled','=','1')->getTotal();
+
+
+            if(!$count) {
+                $thread->disable()->save();
+            }
+        }
+
+        if($modifications->enabled && $modifications->enabled->new) {
+          $this->parent->enable()->save();
+        }
+        
+        if($modifications->enabled) {
+            $this->parent->resetLastReply($this->parent);
+            $this->parent->recountStatsFor($this->parent);
+        }
+    }
+
     protected function _afterEntityDelete(KCommandContext $context)
     {
         $behavior = $this->getService('repos://site/forums.thread')->getBehavior('repliable');
