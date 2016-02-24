@@ -12,27 +12,47 @@
             width: "100%"
         });
 
-        editor.sceditor('instance').focus(function(e) {
+        var instance = editor.sceditor('instance');
+        var reg = /\S/;
+
+        instance.focus(function(e) {
             var val = editor.sceditor('instance').val()
-            
-            if(/\S/.test(val)) {
-                $(this).addClass('focus');
+            var el = $(this);
+
+            if(reg.test(val)) {
+                el.addClass('focus');
             } else {
-                $(this).addClass('error');
+                el.addClass('error');
             }
         });
 
-        editor.sceditor('instance').keyUp(function(e) {
+        instance.keyUp(function(e) {
             var val = editor.sceditor('instance').val()
-            
-            if(/\S/.test(val)) {
-                $(this).removeClass('error').addClass('focus');
+            var el = $(this);
+
+            if(reg.test(val)) {
+
+                if(el.hasClass('error')) {
+                    el.removeClass('error');
+                }
+
+                if(!el.hasClass('focus')) {
+                    el.addClass('focus');
+                }
+
             } else {
-                $(this).removeClass('focus').addClass('error');
+
+                if(el.hasClass('focus')) {
+                    el.removeClass('focus');
+                }
+
+                if(!el.hasClass('err')) {
+                    el.addClass('error');
+                }
             }
         });
 
-        editor.sceditor('instance').blur(function(e) {
+        instance.blur(function(e) {
             $(this).removeClass('focus error');
         });
 
@@ -41,7 +61,7 @@
 
             var val = $('.bbcode-editor').sceditor('instance').val();
 
-            if(/\S/.test(val)) {
+            if(reg.test(val)) {
                 $('#entity-form').submit();
             } else {
                 $('.bbcode-editor').sceditor('instance').focus();
