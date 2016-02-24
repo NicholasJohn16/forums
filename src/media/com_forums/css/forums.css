@@ -41,6 +41,9 @@
 div.entity-meta:empty {
 	display:none;
 }
+.forum-thread-disabled, .forum-post-disabled {
+	opacity: 0.5;
+}
 .forum-post-profile, .forum-post-body {
 	display: block;
 	min-height: 29px;

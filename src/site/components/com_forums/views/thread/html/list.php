@@ -1,11 +1,11 @@
 <?php defined('KOOWA') or die('Restricted access'); ?>
 
 <?php $highlight = $thread->pinned ? 'an-highlight' : ''; ?>
-<?php $muted = $thread->enabled ? '' : 'muted'; ?>
+<?php $disabled = $thread->enabled ? '' : 'forum-thread-disabled'; ?>
 <?php $locked = $thread->locked ? '<i class="icon-lock"></i>' : ''; ?>
 <?php $threadIcon = $thread->getValue('thread_icon') ? $thread->getValue('thread_icon') : ($thread->locked ? 'lock' : 'papers'); ?>
 
-<div class="media row-fluid an-entity <?= $highlight ?> <?= $muted ?>">
+<div class="media row-fluid an-entity <?= $highlight ?> <?= $disabled ?>">
     <a class="span1" href="<?= @route($thread->getURL()) ?>">
         <img class="forum-thread-icon" src="media/com_forums/img/thread-icons/<?= $threadIcon ?>.png" alt="Thread Icon">
     </a>

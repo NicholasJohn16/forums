@@ -1,7 +1,7 @@
 <?php defined('KOOWA') or die ?>
 
 <?php $showToolbar = isset($showToolbar) ? $showToolbar : true; ?>
-<?php $disabled = $post->enabled ? '' : 'muted'; ?>
+<?php $disabled = $post->enabled ? '' : 'forum-thread-disabled'; ?>
 <?php $coverStyle = ($post->author && $post->author->coverSet()) ? "background-image:url('".$post->author->getCoverURL('medium')."')" : ''; ?>
 
 <div class="row-fluid an-entity cid-<?= $post->id; ?>">
