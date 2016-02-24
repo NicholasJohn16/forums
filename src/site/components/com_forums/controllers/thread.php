@@ -17,7 +17,8 @@ class ComForumsControllerThread extends ComBaseControllerService
                 'com://site/stories.controller.behavior.publisher',
                 'com://site/notifications.controller.behavior.notifier',
                 'com://site/hashtags.controller.behavior.hashtagable',
-                'com://site/forums.controller.behavior.repliable'
+                'com://site/forums.controller.behavior.repliable',
+                'ownable' => array('default' => get_viewer()) //needed for /threads route
             )
         ));
 
