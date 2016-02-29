@@ -40,11 +40,13 @@ class ComForumsDomainEntityPost extends ComBaseDomainEntityNode {
 
     protected function _afterEntityInsert(KCommandContext $context)
     {
-        $behavior = $this->getService('repos://site/forums.thread')->getBehavior('repliable');
-        $behavior->incrementPostCount($this->parent);
-        $behavior->incrementPostCount($this->parent->parent);
-        $behavior->setLastReply($this->parent, $this);
-        $behavior->setLastReply($this->parent->parent, $this);
+        $thread = $this->parent;
+        $forum = $thread->parent;
+
+        $thread->incrementPostCount();
+        $forum->incrementPostCount();
+        $thread->setLastReply($this);
+        $forum->setLastReply($this);
     }
 
     protected function _afterEntityUpdate($context)
@@ -66,22 +68,20 @@ class ComForumsDomainEntityPost extends ComBaseDomainEntityNode {
         }
         
         if($modifications->enabled) {
-            $this->parent->resetLastReply($this->parent);
-            $this->parent->recountStatsFor($this->parent);
+            $this->parent->resetLastReply();
+            $this->parent->recountStats();
         }
     }
 
     protected function _afterEntityDelete(KCommandContext $context)
     {
-        $behavior = $this->getService('repos://site/forums.thread')->getBehavior('repliable');
-
-        $behavior->decrementPostCount($this->parent->parent);
-        $behavior->resetLastReply($this->parent->parent);
+        $this->parent->parent->decrementPostCount();
+        $this->parent->parent->resetLastReply();
         $this->parent->parent->save();
 
         if($this->parent->posts->getTotal()) {
-            $behavior->decrementPostCount($this->parent);
-            $behavior->resetLastReply($this->parent);
+            $this->parent->decrementPostCount();
+            $this->parent->resetLastReply();
             $this->parent->save();
         } else {
             $this->parent->delete()->save();

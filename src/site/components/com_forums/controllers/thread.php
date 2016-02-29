@@ -3,6 +3,12 @@
 class ComForumsControllerThread extends ComBaseControllerService
 {
 
+    // public function __construct(KConfig $config) {
+    //     $this->registerCallback('before.edit', 'removeTags');
+    //
+    //     parent::__construct($config);
+    // }
+
     protected function _initialize(\KConfig $config)
     {
 
@@ -91,7 +97,6 @@ class ComForumsControllerThread extends ComBaseControllerService
 
         $this->setItem($post);
 
-        // $name = $context->data->name;
         $this->createStory(array(
             'name' => 'thread_add',
             'owner' => $post->author,
@@ -112,99 +117,106 @@ class ComForumsControllerThread extends ComBaseControllerService
 
     public function _actionEdit($context)
     {
-        if(get_viewer()->admin())
-        {
-            $thread = $this->getItem();
-            $behavior = $this->getService('repos://site/forums.thread')
-                            ->getBehavior('repliable');
+        error_log('actionEdit');
+        // if(get_viewer()->admin())
+        // {
+        //     $thread = $this->getItem();
 
-            // change parent forum
-            if($context->data->pid && $thread->parent->id !== $context->data->pid)
-            {
-                $oldParent = $thread->parent;
+        //     // change parent forum
+        //     if($context->data->pid && $thread->parent->id !== $context->data->pid)
+        //     {
+        //         $oldParent = $thread->parent;
 
-                $newParent = $this->getService('repos://site/forums.forum')
-                            ->getQuery()
-                            ->where('id', '=', $context->data->pid)
-                            ->fetch();
-                $thread->set('parent', $newParent);
-                $thread->set('access', $newParent->access);
-                $thread->save();
+        //         $newParent = $this->getService('repos://site/forums.forum')
+        //                     ->getQuery()
+        //                     ->where('id', '=', $context->data->pid)
+        //                     ->fetch();
+        //         $thread->set('parent', $newParent);
+        //         $thread->set('access', $newParent->access);
+        //         $thread->save();
 
-                foreach($thread->posts as $post) {
-                    $post->set('access', $newParent->access);
-                }
+        //         foreach($thread->posts as $post) {
+        //             $post->set('access', $newParent->access);
+        //         }
 
-                $postCount = count($thread->posts);
+        //         $postCount = count($thread->posts);
 
-                $behavior->decrementThreadCount($oldParent);
-                $behavior->decrementPostCount($oldParent, $postCount);
-                $behavior->incrementThreadCount($newParent);
-                $behavior->incrementPostCount($newParent, $postCount);
-                $behavior->resetLastReply($oldParent);
-                $behavior->resetLastReply($newParent);
-            }
+        //         error_log('postCount:'. $postCount);
 
-            // update name
-            if($context->data->update_replies) {
-                foreach($thread->posts as $post) {
-                    $post->title = $context->data->title;
-                    $post->save();
-                }
-            }
+        //         $oldParent->decrementThreadCount();
+        //         $oldParent->decrementPostCount($postCount);
+        //         $oldParent->resetLastReply();
 
-            // merge threads
-            if($context->data->target_id) {
+        //         $newParent->incrementThreadCount();
+        //         $newParent->incrementPostCount($postCount);
+        //         $newParent->resetLastReply();
+        //     }
 
-                $postCount = count($thread->posts);
-                $mergeThread = $this->getService('repos://site/forums.thread')
-                                    ->getQuery()
-                                    ->where('id','=', $context->data->target_id)
-                                    ->fetch();
+        //     // update name
+        //     if($context->data->update_replies) {
+        //         foreach($thread->posts as $post) {
+        //             $post->title = $context->data->title;
+        //             $post->save();
+        //         }
+        //     }
 
-                foreach($thread->posts as $post) {
-                    // Extract post from current association
-                    // so its not deleted when thread is deleted
-                    // this basically just sets the parent_id to
-                    // null so you have to od this first or any
-                    // changes get overwritten
-                    $thread->posts->extract($post);
-                    // set the merge thread as the new parent
-                    $post->set('parent', $mergeThread);
+        //     // merge threads
+        //     if($context->data->target_id) {
 
-                    if($post->access != $mergeThread->access) {
-                        $post->set('access', $mergeThread->access);
-                    }
+        //         $postCount = count($thread->posts);
+        //         $mergeThread = $this->getService('repos://site/forums.thread')
+        //                             ->getQuery()
+        //                             ->where('id','=', $context->data->target_id)
+        //                             ->fetch();
 
-                    // and then save it
-                    $post->save();
-                }
+        //         foreach($thread->posts as $post) {
+        //             // Extract post from current association
+        //             // so its not deleted when thread is deleted
+        //             // this basically just sets the parent_id to
+        //             // null so you have to od this first or any
+        //             // changes get overwritten
+        //             $thread->posts->extract($post);
+        //             // set the merge thread as the new parent
+        //             $post->set('parent', $mergeThread);
 
-                $thread->posts->save();
+        //             if($post->access != $mergeThread->access) {
+        //                 $post->set('access', $mergeThread->access);
+        //             }
 
-                $behavior->incrementPostCount($mergeThread, $postCount);
-                $behavior->resetLastReply($mergeThread);
+        //             // and then save it
+        //             $post->save();
+        //         }
 
-                if($thread->parent->id !== $mergeThread->parent->id) {
-                    $behavior->decrementThreadCount($thread->parent);
-                    $behavior->decrementPostCount($thread->parent, $postCount);
-                    $behavior->incrementThreadCount($mergeThread->parent);
-                    $behavior->incrementPostCount($mergeThread->parent, $postCount);
-                }
+        //         $thread->posts->save();
 
-                $behavior->resetLastReply($thread->parent);
-                $behavior->resetLastReply($mergeThread->parent);
+        //         $mergeThread->incrementPostCount($postCount);
+        //         $mergeThread->resetLastReply();
 
-                $this->getService('repos://site/forums.thread')->destroy($thread->id);
+        //         if($thread->parent->id !== $mergeThread->parent->id) {
+        //             $thread->parent->decrementThreadCount();
+        //             $thread->parent->decrementPostCount($postCount);
+        //             $mergeThread->parent->incrementThreadCount();
+        //             $mergeThread->parent->incrementPostCount($postCount);
+        //         }
 
-                $thread = $mergeThread;
-            }
+        //         $thread->parent->resetLastReply();
+        //         $mergeThread->parent->resetLastReply();
 
-        }
+        //         $this->getService('repos://site/forums.thread')->destroy($thread->id);
 
+        //         $thread = $mergeThread;
+        //     }
+
+        // }
 
         parent::_actionEdit($context);
+
         $this->getResponse()->setRedirect(JRoute::_($thread->getURL()));
+    }
+
+    public function _actionModerate($context)
+    {
+        error_log('actionModerate');
     }
 
     public function _actionDelete($context)

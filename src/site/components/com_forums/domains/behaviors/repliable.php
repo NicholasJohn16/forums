@@ -24,102 +24,108 @@ class ComForumsDomainBehaviorRepliable extends AnDomainBehaviorAbstract
 		));
 	}
 
-	public function setThreadCount($entity, $num) {
-		$entity->setValue('threadCount', $num);
+	public function setThreadCount($num) {
+		$this->setValue('threadCount', $num);
 	}
 
-	public function getThreadCount($entity) {
-		return $entity->getValue('threadCount');
+	public function getThreadCount() {
+		return $this->getValue('threadCount') ? $this->getValue('threadCount') : 0;
 	}
 
-	public function incrementThreadCount($entity, $amount = 1) {
-		$entity->setValue('threadCount', $entity->getValue('threadCount') + $amount);
+	public function incrementThreadCount($amount = 1) {
+		$this->setValue('threadCount', $this->getValue('threadCount') + $amount);
 	}
 
-	public function decrementThreadCount($entity, $amount = 1) {
-		$entity->setValue('threadCount', $entity->getValue('threadCount') - $amount);
+	public function decrementThreadCount($amount = 1) {
+		$this->setValue('threadCount', $this->getValue('threadCount') - $amount);
 	}
 
-	public function setPostCount($entity, $num) {
-		$entity->setValue('postCount', $num);
+	public function setPostCount($num) {
+		$this->setValue('postCount', $num);
 	}
 
-	public function getPostCount($entity)
+	public function getPostCount()
 	{
-		return $entity->getValue('postCount');
+		return $this->getValue('postCount');
 	}
 
-	public function incrementPostCount($entity, $amount = 1)
+	public function incrementPostCount($amount = 1)
 	{
-		$entity->setValue('postCount', $entity->getValue('postCount') + $amount);
+		$this->setValue('postCount', $this->getValue('postCount') + $amount);
 	}
 
-	public function decrementPostCount($entity, $amount = 1)
+	public function decrementPostCount($amount = 1)
 	{
-		$entity->setValue('postCount', $entity->getValue('postCount') - $amount);
+		$this->setValue('postCount', $this->getValue('postCount') - $amount);
 	}
 
-	public function getReplyCount($entity)
+	public function getReplyCount()
 	{
-		if($entity->getIdentifier()->name === 'thread') {
-			$replyCount = $entity->getValue('postCount') - 1;
-    	} elseif($entity->getIdentifier()->name === 'forum') {
-    		$replyCount = $entity->getValue('postCount') - $entity->getValue('threadCount');
+		if($this->getMixer()->getIdentifier()->name === 'thread') {
+			$replyCount = $this->getValue('postCount') - 1;
+    	} elseif($this->getMixer()->getIdentifier()->name === 'forum') {
+    		$replyCount = $this->getValue('postCount') - $this->getValue('threadCount');
     	}
 
         return $replyCount;
   }
 
-    public function setLastReply($entity, $post) {
+    public function setLastReply($post) {
     	
     	if($post) {
-    		$entity->set('lastReply', $post);
-    		$entity->set('lastReplier', $post->author);
-    		$entity->set('lastReplyTime', $post->creationTime);
+    		$this->set('lastReply', $post);
+    		$this->set('lastReplier', $post->author);
+    		$this->set('lastReplyTime', $post->creationTime);
     	} else {
-    		$entity->set('lastReply', null);
-    		$entity->set('lastReplier', null);
-    		$entity->set('lastReplyTime', null);
+    		$this->set('lastReply', null);
+    		$this->set('lastReplier', null);
+    		$this->set('lastReplyTime', null);
     	}
     }
 
-    public function resetLastReply($entity) {
+    public function resetLastReply() {
+    	$lastReply = null;
 
-    	if($entity->getIdentifier()->name === 'thread') {
-    		$lastReply = $entity->posts->reset()->order('creationTime', 'DESC')->fetch();
+    	if($this->getMixer()->getIdentifier()->name === 'thread') {
+    		$lastReply = $this->getMixer()->posts->reset()->order('creationTime', 'DESC')->fetch();
     	}
 
-    	if($entity->getIdentifier()->name === 'forum') {
-    		$thread = $entity->threads->reset()->order('lastReplyTime', 'DESC')->fetch();
-    		$lastReply = $thread->posts->order('creationTime', 'DESC')->fetch();
+    	if($this->getMixer()->getIdentifier()->name === 'forum') {
+    		if($this->threads->getTotal()) {
+    			$thread = $this->getMixer()->threads->reset()->order('lastReplyTime', 'DESC')->fetch();
+    			$lastReply = $thread->posts->order('creationTime', 'DESC')->fetch();
+    		}
     	}
 
-    	$this->setLastReply($entity, $lastReply);
+    	$this->setLastReply($lastReply);
     }
 
     public function getReplyOffset($id)
 	{
 		$this->getRepository()->getStore()->execute('set @i = 0');
 
-		$query = clone $this->posts->getQuery();
+		$query = clone $this->getMixer()->posts->getQuery();
 
 		return $query->where('@col(id) < '.(int) $id)->order('created_on')->fetchValue('MAX(@i := @i + 1)');
 	}
 
-	public function recountStatsFor($entity) {
+	public function recountStats() {
 
-		if($entity->getIdentifier()->name == 'forum') {
-			$threadIds = $entity->threads->reset()->select('id')->fetchValues('id');
+		if($this->getMixer()->getIdentifier()->name == 'forum') {
+			$threadIds = $this->getMixer()->threads->reset()->select('id')->fetchValues('id');
 			$threadCount = count($threadIds);
-			$postCount = $this->getService('repos://site/forums.post')->getQuery()->where('parent_id', 'IN', $threadIds)->fetchValue('COUNT(id)');
+			$postCount = $this->getService('repos://site/forums.post')
+							->getQuery()
+							->where('parent_id', 'IN', $threadIds)
+							->fetchValue('COUNT(id)');
 
-			$entity->setValue('threadCount', $threadCount);
-			$entity->setValue('postCount', $postCount);
+			$this->setValue('threadCount', $threadCount);
+			$this->setValue('postCount', $postCount);
 		}
 
-		if($entity->getIdentifier()->name == 'thread') {
-			$postCount = $entity->posts->reset()->where('enabled','=','1')->getTotal();
-			$entity->setValue('postCount', $postCount);
+		if($this->getMixer()->getIdentifier()->name == 'thread') {
+			$postCount = $this->getMixer()->posts->reset()->where('enabled','=','1')->getTotal();
+			$this->setValue('postCount', $postCount);
 		}
 	}
 

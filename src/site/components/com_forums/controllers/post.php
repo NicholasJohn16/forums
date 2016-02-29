@@ -63,13 +63,11 @@
             if($post->parent->id !== $context->data->pid && get_viewer()->admin()) {
 
                 $originalParent = $post->parent;
-                $behavior = $this->getService('repos://site/forums.thread')
-                                ->getBehavior('repliable');
-
+                
                 if($context->data->pid)
                 {
-                    $behavior->decrementPostCount($post->parent);
-                    $behavior->resetLastReply($post->parent);
+                    $post->parent->decrementPostCount();
+                    $post->parent->resetLastReply();
 
                     $thread = $this->getService('repos://site/forums.thread')
                         ->getQuery()
@@ -77,12 +75,12 @@
                         ->fetch();
 
                     $post->set('parent', $thread)->save();
-                    $behavior->incrementPostCount($thread);
-                    $behavior->resetLastReply($thread);
+                    $thread->incrementPostCount();
+                    $thread->resetLastReply();
                 }
                 else
                 {
-                    $behavior->decrementPostCount($originalParent);
+                    $originalParent->decrementPostCount();
 
                     $thread = $this->getService('repos://site/forums.thread')
                         ->getEntity(array(
@@ -96,9 +94,9 @@
                     $thread->save();
                     $post->set('parent', $thread)->save();
 
-                    $behavior->incrementPostCount($thread);
-                    $behavior->setLastReply($thread, $post);
-                    $behavior->resetLastReply($originalParent);
+                    $thread->incrementPostCount();
+                    $thread->setLastReply($post);
+                    $originalParent->resetLastReply();
                 }
 
                 if(!$originalParent->posts->getTotal())  {

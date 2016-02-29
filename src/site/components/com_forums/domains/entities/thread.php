@@ -7,7 +7,8 @@ class ComForumsDomainEntityThread extends ComBaseDomainEntityNode {
         $config->append(array(
             'attributes' => array(
                 'name' => array('required' => AnDomain::VALUE_NOT_EMPTY),
-                'oldid' => array('column' => 'filesize', 'type' => 'integer')
+                'oldid' => array('column' => 'filesize', 'type' => 'integer'),
+                'body'
             ),
             'behaviors' => array(
                 'authorizer',
@@ -37,17 +38,11 @@ class ComForumsDomainEntityThread extends ComBaseDomainEntityNode {
     }
     
     protected function _afterEntityInsert(KCommandContext $context) {
-        // $this->getService('repos:forums.thread')->getBehavior('repliable')->resetStats($this->parent);
-        // $this->getService('repos:forums.thread')->getBehavior('repliable')->resetStats($this->parent->parent);
-        // $this->parent->getRepository()->getBehavior('repliable')->resetStats(array($this->parent));
-        $behavior = $this->getService('repos:forums.thread')->getBehavior('repliable');
-        $behavior->incrementThreadCount($this->parent);
+        $this->parent->incrementThreadCount();
     }
 
     protected function _afterEntityDelete(KCommandContext $context) {
-        // $this->parent->getRepository()->getBehavior('repliable')->resetStats($this->parent->parent);
-        $behavior = $this->getService('repos:forums.thread')->getBehavior('repliable');
-        $behavior->decrementThreadCount($this->parent);
+        $this->parent->decrementThreadCount();
     }
 
     public function isUnread()

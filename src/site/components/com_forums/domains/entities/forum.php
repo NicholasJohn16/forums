@@ -34,14 +34,6 @@ class ComForumsDomainEntityForum extends ComBaseDomainEntityNode {
         parent::_initialize($config);
     }
 
-    public function getThreadCount() {
-        return $this->getValue('threadCount') ? $this->getValue('threadCount') : 0;
-    }
-
-    public function getReplyCount() {
-        return $this->getValue('postCount') - $this->getValue('threadCount');
-    }
-
     public function getNewCount() {
         // $loginDate = get_viewer()->getLastLoginDate()->serialize();
         return $this->threads
