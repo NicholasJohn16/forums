@@ -9,6 +9,6 @@
     	<?= @link($object)?>
     </h4>
     <div class="entity-body">
-	    <?= @content(@helper('text.truncate', @escape($object->body), array('length'=>200, 'consider_html' => true)), array('exclude' => 'link')); ?>
+	    <?= @helper('text.truncate', @content(@escape($object->body), array('exclude' => 'link')), array('length'=>200, 'consider_html' => true, 'exact' => false)); ?>
 	</div>	
 </data>
