@@ -66,58 +66,20 @@
 			evt.preventDefault();
 
 			var btn = $(this);
-			var quickreply = $('.'+btn.data('target'));
+			var form = $('#entity-form');
+			var editor = $('.bbcode-editor').sceditor('instance');
 
-			if(quickreply.is(':visible')) {
-				console.log('visible');
-			} else {
-				console.log('invisible');
-			}
-			// quickreply.removeClass('hidden');
-			quickreply.slideDown('slow', function() {
-				quickreply.find('textarea').focus();
-			});
+			editor.val('');
 
 			if(btn.data('quote')) {
-				quickreply.find('textarea').val(btn.data('quote'));
+				editor.insert(btn.data('quote'));
 			}
 
+			$('body').animate({
+				scrollTop: form.offset().top
+			}, 1000);
 
-			cancelQuickreply = function(evt) {
-				evt.preventDefault();
-				// quickreply.addClass('hidden').removeClass('in');
-				quickreply.slideUp('slow');
-				quickreply.find('textarea').val('');
-				console.log(this);
-				$(this).off('click', cancelQuickreply);
-			}
-
-			postReply = function(evt) {
-				evt.preventDefault();
-				$(this).prop('disabled', true);
-				var form = quickreply.find('form');
-
-				$.ajax({
-					method: 'post',
-					url: form.attr('action'),
-					data: {
-						title: form.find('input[name="title"]').val(),
-						body: form.find('textarea[name="body"]').val()
-					},
-					beforeSend: function() {
-						quickreply.fadeTo('fast', 0.3).addClass('uiActivityIndicator');
-					},
-					success: function(response, status, xhr) {
-						quickreply.fadeTo('fast', 1).removeClass('uiActivityIndicator').addClass('hidden');
-						window.location = xhr.getResponseHeader('location');
-					}
-				})
-
-			}
-
-			quickreply.find('button[data-action="cancel"]').on('click', cancelQuickreply);
-			quickreply.find('button[type="submit"]').on('click', postReply);
-
+			editor.focus();
 		});	
 
 	});

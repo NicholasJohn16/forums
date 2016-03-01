@@ -89,24 +89,3 @@
         </div>
     </div>
 </div>
-
-<?php if($post->authorize('add')): ?>
-    <div class="row-fluid forum-quickreply-row forum-quickreply-<?= $post->id ?>" style="overflow: hidden; display: none;">
-        <div class="text-center forum-post-profile">
-            <div class="entity-portrait-square">
-                <?= @avatar(get_viewer()) ?>
-            </div>
-        </div>
-        <div class="forum-post-body an-entity">
-            <form class="an-entity forum-quickreply-form" method="post" action="<?= @route('option=forums&view=posts&pid='.$post->parent->id) ?>">
-                <input type="text" name="title" value="<?= $post->title ?>">
-                <textarea class="bbcode-editor input-block-level" rows="5" name="body"></textarea>
-                <span class="help-block"><?= @text('COM-FORUMS-POST-QUICKREPLY-BBCODE') ?></span>
-                <div class="btn-toolbar">
-                    <button class="btn btn-default btn-mini" data-action="cancel"><?= @text('LIB-AN-ACTION-CANCEL') ?></button>
-                    <button class="btn btn-primary btn-mini" type="submit"><?= @text('COM-FORUMS-POST-REPLY') ?></button>
-                </div>
-            </form>
-        </div>
-    </div>
-<?php endif; ?>

@@ -29,10 +29,9 @@
 	<?php endforeach; ?>
 </div>	
 
-
-<?php if(false && $thread->authorize('reply')): ?>
+<?php if($thread->authorize('reply')): ?>
 	<div class="row-fluid">
-		<div class="span11 offset1">
+		<div class="span12">
 			<?= @view('post')->layout('form')->post(null)->parent($thread)->title($thread->title); ?>
 		</div>
 	</div>

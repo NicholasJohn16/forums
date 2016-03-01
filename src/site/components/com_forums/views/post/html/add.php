@@ -9,4 +9,8 @@
     <li class="active"><?= @text('COM-FORUMS-THREAD-REPLY') ?></li>
 </ul>
 
+<div class="page-header">
+	<h2><?= @text('COM-FORUMS-POST-REPLY-THREAD') ?></h2>
+</div>
+
 <?= @template('form') ?>

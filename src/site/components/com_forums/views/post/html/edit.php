@@ -7,4 +7,8 @@
     <li class="active">Edit</li>
 </ul>
 
+<div class="page-header">
+	<h2><?= @text('COM-FORUMS-POST-EDIT-POST') ?></h2>
+</div>
+
 <?= @template('form') ?>

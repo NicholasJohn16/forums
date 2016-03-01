@@ -12,12 +12,6 @@
 
 <form id="entity-form" data-behavoir="FormValidator" method="post" action="<?= @route($post->getURL())?>">
     
-    <?php if($post->persisted()): ?>
-        <legend><?= @text('COM-FORUMS-POST-EDIT-POST') ?></legend>
-    <?php else: ?>
-        <legend><?= @text('COM-FORUMS-POST-REPLY-THREAD') ?></legend>
-    <?php endif; ?>
-
     <div class="control-group">
         <label class="control-label" for="name"><?= @text('COM-FORUMS-POST-TITLE') ?></label>
         <div class="controls">
