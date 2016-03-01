@@ -42,7 +42,7 @@
     <input type="hidden" name="pid" value="<?= $parent_id ?>"/>
 
     <?php if ($post->persisted()): ?>
-        <a class="btn" href="<?= @route($post->parent->getURL()) ?>">
+        <a class="btn" href="<?= @route($post->getThreadURL()) ?>">
             <?= @text('LIB-AN-ACTION-CANCEL') ?>
         </a> 
         <button class="btn btn-primary">

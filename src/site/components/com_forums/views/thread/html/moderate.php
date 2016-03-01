@@ -72,7 +72,7 @@
 		</div>
 	</fieldset>
 
-	<!-- <input type="hidden" name="action" value="moderate"> -->
+	<input type="hidden" name="action" value="moderate">
 
 	<a href="<?= @route($thread->getURL()) ?>" class="btn">
 		<?= @text('LIB-AN-ACTION-CANCEL') ?>

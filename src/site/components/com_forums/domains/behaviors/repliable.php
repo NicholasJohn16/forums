@@ -104,7 +104,7 @@ class ComForumsDomainBehaviorRepliable extends AnDomainBehaviorAbstract
 	{
 		$this->getRepository()->getStore()->execute('set @i = 0');
 
-		$query = clone $this->getMixer()->posts->getQuery();
+		$query = clone $this->posts->getQuery();
 
 		return $query->where('@col(id) < '.(int) $id)->order('created_on')->fetchValue('MAX(@i := @i + 1)');
 	}

@@ -26,7 +26,7 @@
 
 <?= @view('post')->post($post)->set('showToolbar', false) ?>
 
-<form id="entity-form" method="post" action="<?= @route($post->getURL().'&action=moderate') ?>">
+<form id="entity-form" method="post" action="<?= @route($post->getURL()) ?>">
 
 	<fieldset>
 		<legend><?= @text('COM-FORUMS-POST-MOVE-POST') ?></legend>	
@@ -49,6 +49,8 @@
 		</div>
 
 	</fieldset>
+
+	<input type="hidden" name="action" value="moderate">
 
 		<a href="<?= @route($post->parent->getURL()) ?>" class="btn">
 			<?= @text('LIB-AN-ACTION-CANCEL') ?>

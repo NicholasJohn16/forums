@@ -56,15 +56,15 @@
             parent::_actionRead($context);
          }
 
-        public function _actionEdit($context)
+        public function _actionModerate($context)
         {
             $post = $this->getItem();
 
-            if($post->parent->id !== $context->data->pid && get_viewer()->admin()) {
+            if(get_viewer()->admin() && $post->parent->id !== $context->data->pid) {
 
                 $originalParent = $post->parent;
                 
-                if($context->data->pid)
+                if($context->data->pid) //move to thread
                 {
                     $post->parent->decrementPostCount();
                     $post->parent->resetLastReply();
@@ -78,7 +78,7 @@
                     $thread->incrementPostCount();
                     $thread->resetLastReply();
                 }
-                else
+                else // create new thread
                 {
                     $originalParent->decrementPostCount();
 
@@ -106,8 +106,7 @@
             } else {
                 $context->data->pid = $post->parent->id;
             }
-
-            parent::_actionEdit($context);
+            
             $post->load(array('parent'));
 
             $this->getResponse()->setRedirect(JRoute::_($post->parent->getURL()));
@@ -120,17 +119,7 @@
             $this->parent->resetRead();
 
             $post = parent::_actionAdd($context);
-
         }
-
-        // public function _actionDelete($context)
-        // {
-        //     $post = $this->getItem();
-        //     $thread = $post->parent;
-        //     $url = $thread->getURL();
-        //
-        //     $post->delete();
-        // }
 
         public function createStoryCallback(KCommandContext $context)
         {
