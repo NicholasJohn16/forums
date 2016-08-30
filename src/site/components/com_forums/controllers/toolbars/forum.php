@@ -12,10 +12,6 @@ class ComForumsControllerToolbarForum extends ComBaseControllerToolbarDefault {
         $viewer = get_viewer();
         $entity = $this->getController()->getItem();
 
-        if(!$entity && !$viewer->guest()) {
-            $this->addCommand('promote');
-        }
-
         if (!$entity && $viewer->admin()) {
             $this->addCommand('addCategory');
             $this->addCommand('addForum');
@@ -57,19 +53,7 @@ class ComForumsControllerToolbarForum extends ComBaseControllerToolbarDefault {
                 ->dataRedirect(JRoute::_($entity->parent->getURL()));
         }
     }
-
-    protected function _commandPromote($command)
-    {
-        $viewer = get_viewer();
-
-        $label = $viewer->admin() ? "Demote to Registered" : "Promote to Administrator";
-
-        $command->append(array(
-            'label' => $label, 
-            'attribs' => array('data-action' => 'promote')))
-            ->class('btn btn-default')->href('#');
-    }
-    
+   
     protected function _commandNew($command) 
     {
         $entity = $this->getController()->getItem();

@@ -22,26 +22,6 @@
 
 		});
 
-		$('a[data-action="promote"]').on('click', function(evt) {
-			evt.preventDefault();
-			var btn = $(this);
-
-			$.ajax({
-				method: 'post',
-				url: 'index.php?option=com_forums',
-				data: {
-					action: 'promote'
-				},
-				beforeSend: function() {
-					btn.fadeTo('fast', 0.3).addClass('uiActivityIndicator');
-				},
-				success: function() {
-					btn.fadeTo('fast', 1).removeClass('uiActivityIndicator');
-				}
-			});
-
-		});
-
 		$('body').on('click', 'a[data-action="lock"], a[data-action="unlock"]', function(evt) {
 			evt.preventDefault();
 			var btn = $(this);

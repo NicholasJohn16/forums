@@ -6,8 +6,7 @@ class ComForumsDomainEntityCategory extends ComBaseDomainEntityNode {
 
 		$config->append(array(
 			'attributes' => array(
-				'name' => array('required' => AnDomain::VALUE_NOT_EMPTY),
-				'oldid' => array('column' => 'filesize', 'type' => 'integer')
+				'name' => array('required' => AnDomain::VALUE_NOT_EMPTY)
 			),
 			'relationships' => array('forums'),
 			'behaviors' => array(

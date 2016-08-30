@@ -1,6 +1,7 @@
 <?php
 
-class ComForumsControllerPermissionThread extends LibBaseControllerPermissionDefault {
+class ComForumsControllerPermissionThread extends LibBaseControllerPermissionDefault 
+{
 
 	public function canAdd() {
 		$viewer = get_viewer();

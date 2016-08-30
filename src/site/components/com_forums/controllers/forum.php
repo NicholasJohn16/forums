@@ -28,19 +28,6 @@ class ComForumsControllerForum extends ComBaseControllerService {
         parent::_initialize($config);
     }
 
-    public function _actionPromote($context) {
-        $viewer = get_viewer();
-
-        if($viewer->admin()) {
-            $usertype = 'registered';
-        } else {
-            $usertype = 'administrator';
-        }
-        
-        $viewer->set('userType', $usertype);
-        $viewer->save();
-    }
-
     public function _actionBrowse($context)
     {
     //     $session = Kservice::get('com://site/people.controller.session');

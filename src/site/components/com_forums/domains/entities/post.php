@@ -8,8 +8,7 @@ class ComForumsDomainEntityPost extends ComBaseDomainEntityNode {
         $config->append(array(
             'attributes' => array(
                 'name' => array('required' => AnDomain::VALUE_NOT_EMPTY),
-                'body' => array('required' => AnDomain::VALUE_NOT_EMPTY),
-                'oldid' => array('column' => 'filesize', 'type' => 'integer')
+                'body' => array('required' => AnDomain::VALUE_NOT_EMPTY)
             ),
             'behaviors' => array(
                 'parentable' => array(
