@@ -12,7 +12,7 @@
         </div>
         <div class="forum-profile-content">
             <div class="forum-profile-author">
-                <?= @avatar($post->author, 'medium') ?>    
+                <?= @avatar($post->author, 'square') ?>    
                 <h4 class="author-name"><?= @name($post->author) ?></h4>
             </div>
 
