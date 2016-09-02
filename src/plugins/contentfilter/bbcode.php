@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $autoloader = include JPATH_VENDOR.'/autoload.php';
 $autoloader->add('Decoda', JPATH_LIBRARIES . '/decoda');
@@ -21,11 +21,11 @@ class PlgContentfilterBbcode extends PlgContentfilterAbstract
         $decoda->setStrict(false);
         // $decoda->removeFilter('Video');
         $decoda->removeHook('Censor');
-        //$decoda->removeFilter('Url');      
-        
+        //$decoda->removeFilter('Url');
+
         $html = $decoda->parse();
 
-        $nesting = array(); 
+        $nesting = array();
         $closing = array();
         $scope = array();
         $errors = array();
@@ -56,9 +56,9 @@ class PlgContentfilterBbcode extends PlgContentfilterAbstract
             $string .= '</div>';
             echo $string;
         }
-        
+
         return $html;
     }
-	
-	
+
+
 }
