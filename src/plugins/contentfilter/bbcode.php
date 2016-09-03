@@ -17,7 +17,7 @@ class PlgContentfilterBbcode extends PlgContentfilterAbstract
     public function filter($text)
     {
 		$config = array('escapeHtml' => false);
-        $decoda = new Decoda\Decoda($text, $config);
+        $decoda = new Decoda\Decoda($text);
         $decoda->defaults();
         $decoda->setStrict(false);
         // $decoda->removeFilter('Video');
