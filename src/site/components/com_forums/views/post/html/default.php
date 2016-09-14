@@ -6,7 +6,7 @@
 
 <div class="row-fluid an-entity cid-<?= $post->id; ?>">
 
-    <div class="forum-post-profile">
+    <div class="forum-post-profile span3 ">
         <div class="forum-profile-banner" style="<?= $coverStyle ?>">
 
         </div>
@@ -20,9 +20,9 @@
                 
             </div>
         </div>
-        <?php if($post->author): ?>
+        <?php if(false && $post->author): ?>
             <div class="forum-profile-actions an-socialgraph-stat">
-                <!-- <div class="stat-count">
+                <div class="stat-count">
                     <?= $post->author->leaderCount ?>
                     <span class="stat-name">
                         <?= @text('COM-ACTORS-SOCIALGRAPH-LEADERS') ?>
@@ -37,18 +37,18 @@
                 <div class="stat-count">
                     0
                     <span class="stat-name"><?= @text('COM-FORUMS-POST-COUNT') ?></span>
-                </div> -->
+                </div>
             </div>
         <?php endif; ?>
     </div>
    
-    <div class="forum-post-body <?= $disabled ?>">
+    <div class="forum-post-body span9 <?= $disabled ?>">
 
         <h3 class="entity-title">
             <a class="forum-post-title" href="<?= @route($post->getThreadURL()) ?>">
                 <?= $post->title; ?>
                 <?php if($post->isUnread()): ?>
-                    <small class="text-success"><?= @text('COM-FORUMS-POST-NEW') ?></small>
+                    <span class="label label-success"><?= @text('COM-FORUMS-POST-NEW') ?></span>
                 <?php endif; ?>
             </a>
         </h3>

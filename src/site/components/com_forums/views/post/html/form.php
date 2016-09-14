@@ -4,6 +4,7 @@
 <?php $parent_id = empty($parent) ? $post->parent->id : $parent->id ?>
 <?php $body = empty($body) ? $post->body : $body; ?>
 <?php $title = empty($title) ? $post->title : $title ?>
+<?php $inline = isset($inline) ? $inline : false; ?>
 
 <script src="com_forums/js/jquery.sceditor.bbcode.min.js"/>
 <script src="com_forums/js/editor.js" />
@@ -13,7 +14,11 @@
 <form id="entity-form" data-behavoir="FormValidator" method="post" action="<?= @route($post->getURL())?>">
     
     <div class="control-group">
-        <label class="control-label" for="name"><?= @text('COM-FORUMS-POST-TITLE') ?></label>
+
+        <?php if(!$inline): ?>
+            <label class="control-label" for="name"><?= @text('COM-FORUMS-POST-TITLE') ?></label>
+        <?php endif; ?>
+
         <div class="controls">
             <input 
                 data-validators="required" 
@@ -29,7 +34,10 @@
     </div>
         
     <div class="control-group">
-        <label class="control-label" for="body"><?= @text('COM-FORUMS-POST-BODY') ?></label>
+        <?php if(!$inline): ?>
+            <label class="control-label" for="body"><?= @text('COM-FORUMS-POST-BODY') ?></label>
+        <?php endif; ?>
+
         <textarea rows="10" class="bbcode-editor input-block-level" name="body"><?= $body ?></textarea>
     </div>
     
@@ -43,9 +51,13 @@
             <?= @text('LIB-AN-ACTION-UPDATE') ?>
         </button>
     <?php else: ?>
-        <a class="btn small" href="<?= @route($parent->getURL()) ?>" >
-            <?= @text('LIB-AN-ACTION-CANCEL') ?>
-        </a> 
+
+        <?php if(!$inline): ?>
+            <a class="btn small" href="<?= @route($parent->getURL()) ?>" >
+                <?= @text('LIB-AN-ACTION-CANCEL') ?>
+            </a> 
+        <?php endif; ?>
+
         <button type="submit" data-trigger="Add" class="btn btn-primary">
             <?= @text('LIB-AN-ACTION-ADD') ?>
         </button>

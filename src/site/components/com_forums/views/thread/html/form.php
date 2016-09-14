@@ -46,7 +46,7 @@
     <a class="btn small" href="<?= @route($parent->getURL()) ?>" tabindex="4">
         <?= @text('LIB-AN-ACTION-CANCEL') ?>
     </a> 
-    <button data-trigger="Add" class="btn btn-primary" tabindex="3">
+    <button type="submit" class="btn btn-primary" tabindex="3">
         <?= @text('LIB-AN-ACTION-ADD') ?>
     </button>
     

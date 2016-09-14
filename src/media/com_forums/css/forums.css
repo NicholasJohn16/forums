@@ -57,7 +57,6 @@ div.entity-meta:empty {
 	min-height: 110px;
 }
 .forum-post-profile {
-	width: 20%;
 	min-width: 70px;
 	position: relative;
 	z-index: 1;
@@ -86,12 +85,9 @@ div.entity-meta:empty {
 	color: #000;
 }
 .forum-profile-author .actor-avatar {
-	max-width: 100px;
-	max-height: 100px;
 	border: 3px solid #FFF;
 }
 .forum-post-body {
-	width: 80%;
 }
 form.forum-quickreply-form {
 	padding-top: 10px;

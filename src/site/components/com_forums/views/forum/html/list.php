@@ -18,7 +18,7 @@
                 <?php echo $locked . $forum->name; ?>
             </a>
             <?php if($newCount = $forum->getNewCount()): ?>
-                <small class="text-success"><?= sprintf(@text('COM-FORUMS-FORUM-NEW-COUNT'), $newCount) ?></small>
+                <span class="label label-success"><?= sprintf(@text('COM-FORUMS-FORUM-NEW-COUNT'), $newCount) ?></span>
             <?php endif; ?>
         </h4>
         <p><?= $forum->body; ?></p>

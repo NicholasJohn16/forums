@@ -17,7 +17,7 @@
 	<div class="entity-description-wrapper">
 		<h1 class="entity-title"><?= $thread->title ?>
 			<?php if($thread->isUnread()): ?>
-				<small class="text-success"><?= @text('COM-FORUMS-THREAD-NEW') ?></small>
+				<span class="label label-success"><?= @text('COM-FORUMS-THREAD-NEW') ?></span>
 			<?php endif; ?>
 		</h1>
 	</div>
@@ -32,7 +32,7 @@
 <?php if($thread->authorize('reply')): ?>
 	<div class="row-fluid">
 		<div class="span12">
-			<?= @view('post')->layout('form')->post(null)->parent($thread)->title($thread->title); ?>
+			<?= @view('post')->layout('form')->post(null)->parent($thread)->title($thread->title)->inline(true); ?>
 		</div>
 	</div>
 <?php endif; ?>

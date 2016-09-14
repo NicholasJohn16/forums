@@ -1,7 +1,7 @@
  $(document).ready(function() {
-        var editor = $('.bbcode-editor');
+        var textarea = $('.bbcode-editor');
 
-        editor.sceditor({
+        textarea.sceditor({
             plugins: "bbcode",
             style: "/media/com_forums/css/jquery.sceditor.default.min.css",
             toolbarExclude: "emoticon,print,rtl,ltr,youtube,date,time,cut,copy,paste,pastetext,email",
@@ -12,59 +12,59 @@
             width: "100%"
         });
 
-        var instance = editor.sceditor('instance');
+        var editor = textarea.sceditor('instance');
         var reg = /\S/;
 
-        instance.focus(function(e) {
-            var val = editor.sceditor('instance').val()
-            var el = $(this);
+        // editor.focus(function(e) {
+        //     var val = editor.val()
+        //     var el = $(this);
 
-            if(reg.test(val)) {
-                el.addClass('focus');
-            } else {
-                el.addClass('error');
-            }
-        });
+        //     if(reg.test(val)) {
+        //         el.addClass('focus').removeClass('error');
+        //     } else {
+        //         el.addClass('error').removeClass('focus');
+        //     }
+        // });
 
-        instance.keyUp(function(e) {
-            var val = editor.sceditor('instance').val()
-            var el = $(this);
+        // editor.keyUp(function(e) {
+        //     var val = editor.val()
+        //     var el = $(this);
 
-            if(reg.test(val)) {
+        //     if(reg.test(val)) {
 
-                if(el.hasClass('error')) {
-                    el.removeClass('error');
-                }
+        //         // if(el.hasClass('error')) {
+        //             el.removeClass('error').addClass('focus');
+        //         // }
 
-                if(!el.hasClass('focus')) {
-                    el.addClass('focus');
-                }
+        //         // if(!el.hasClass('focus')) {
+        //             // el.addClass('focus');
+        //         // }
 
-            } else {
+        //     } else {
 
-                if(el.hasClass('focus')) {
-                    el.removeClass('focus');
-                }
+        //         // if(el.hasClass('focus')) {
+        //             el.removeClass('focus').addClass('error');
+        //         // }
 
-                if(!el.hasClass('err')) {
-                    el.addClass('error');
-                }
-            }
-        });
+        //         // if(!el.hasClass('err')) {
+        //             // el.addClass('error');
+        //         // }
+        //     }
+        // });
 
-        instance.blur(function(e) {
-            $(this).removeClass('focus error');
-        });
+        // editor.blur(function(e) {
+        //     $(this).removeClass('focus error');
+        // });
 
         $('body').on('click', '#entity-form button[type="submit"]', function(evt) {
             evt.preventDefault();
 
-            var val = $('.bbcode-editor').sceditor('instance').val();
+            var val = editor.val();
 
             if(reg.test(val)) {
                 $('#entity-form').submit();
             } else {
-                $('.bbcode-editor').sceditor('instance').focus();
+                editor.focus();
             }
         });
     });

@@ -15,7 +15,7 @@
           <a href="<?= @route($thread->getURL()) ?>">
             <?php echo $locked . $thread->name ?>
             <?php if($thread->isUnread()): ?>
-                <small class="text-success"><?= @text('COM-FORUMS-THREAD-NEW') ?></small>
+                <span class="label label-success"><?= @text('COM-FORUMS-THREAD-NEW') ?></span>
             <?php endif; ?>
           </a>
         </h4>
