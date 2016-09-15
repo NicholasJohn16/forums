@@ -1,3 +1,12 @@
+/* 	
+	for future reference:
+	hide radio buttons then 
+	:checked + img {
+		border: 1px solid red;
+	}
+	see: http://stackoverflow.com/a/17206675/1903619
+*/
+
 .breadcrumb {
   padding: 8px 15px;
   margin: 0 0 19px;
