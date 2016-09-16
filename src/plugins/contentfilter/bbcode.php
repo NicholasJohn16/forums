@@ -25,8 +25,6 @@ class PlgContentfilterBbcode extends PlgContentfilterAbstract
         //$decoda->removeFilter('Url');
         $parsed = $decoda->parse();
         $html = str_replace('<br />', '', $parsed);
-        error_log('text: '. $text);
-        error_log('html: '. $html);
 
         $nesting = array();
         $closing = array();
