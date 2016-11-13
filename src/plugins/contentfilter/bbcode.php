@@ -3,6 +3,52 @@
 $autoloader = include JPATH_VENDOR.'/autoload.php';
 $autoloader->add('Decoda', JPATH_LIBRARIES . '/decoda');
 
+class ComForumsBlock extends \Decoda\Filter\BlockFilter {
+    function __construct() {
+
+        $align = array(
+            'align' => array(
+                'htmlTag' => 'div',
+                'displayType' => 2,
+                'allowedTypes' => 3,
+                'attributes' => array(
+                    'default' => array('/^(?:left|center|right|justify)$/i', 'text-{default}')
+                ),
+                'mapAttributes' => array(
+                    'default' => 'class'
+                )
+            ),
+            'left' => array(
+                'htmlTag' => 'div',
+                'displayType' => 2,
+                'allowedTypes' => 3,
+                'htmlAttributes' => array(
+                    'class' => 'text-left'
+                )
+            ),
+            'right' => array(
+                'htmlTag' => 'div',
+                'displayType' => 2,
+                'allowedTypes' => 3,
+                'htmlAttributes' => array(
+                    'class' => 'text-right'
+                )
+            ),
+            'center' => array(
+                'htmlTag' => 'div',
+                'displayType' => 2,
+                'allowedTypes' => 3,
+                'htmlAttributes' => array(
+                    'class' => 'text-center'
+                )
+            )
+        );
+
+        $this->_tags = array_merge($this->_tags, $align);
+        parent::__construct();
+    }
+}
+
 class PlgContentfilterBbcode extends PlgContentfilterAbstract
 {
 	protected function _initialize(KConfig $config)
@@ -18,11 +64,22 @@ class PlgContentfilterBbcode extends PlgContentfilterAbstract
     {
 		$config = array('escapeHtml' => false);
         $decoda = new Decoda\Decoda($text, $config);
-        $decoda->defaults();
         $decoda->setStrict(false);
-        // $decoda->removeFilter('Video');
-        $decoda->removeHook('Censor');
-        //$decoda->removeFilter('Url');
+        // $decoda->defaults();
+        $decoda->addFilter(new \Decoda\Filter\DefaultFilter());
+        $decoda->addFilter(new \Decoda\Filter\EmailFilter());
+        $decoda->addFilter(new \Decoda\Filter\ImageFilter());
+        $decoda->addFilter(new \Decoda\Filter\UrlFilter());
+        $decoda->addFilter(new \Decoda\Filter\TextFilter());
+        $decoda->addFilter(new \Decoda\Filter\VideoFilter());
+        $decoda->addFilter(new \Decoda\Filter\CodeFilter());
+        $decoda->addFilter(new \Decoda\Filter\QuoteFilter());
+        $decoda->addFilter(new \Decoda\Filter\ListFilter());
+        $decoda->addFilter(new \Decoda\Filter\TableFilter());
+        $decoda->addFilter(new ComForumsBlock);
+    
+        $decoda->addHook(new \Decoda\Hook\ClickableHook());
+
         $parsed = $decoda->parse();
         $html = str_replace('<br />', '', $parsed);
 
