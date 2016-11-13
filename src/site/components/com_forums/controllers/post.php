@@ -21,7 +21,7 @@
                     'com://site/forums.controller.behavior.enablable',
                     'com://site/stories.controller.behavior.publisher',
                     'com://site/notifications.controller.behavior.notifier',
-                    'com://site/hashtags.controller.behavior.hashtagable',
+                    'com://site/forums.controller.behavior.hashtagable',
                     'mentionable',
                     'ownable' => array('default' => get_viewer())
                 )
