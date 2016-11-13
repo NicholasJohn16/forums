@@ -108,7 +108,7 @@ class ComForumsControllerThread extends ComBaseControllerService
             'name' => 'thread_add',
             'subject' => $thread->author,
             'target' => $thread->author,
-            'object' => $thread,
+            'object' => $post, // maybe this should be $post?
             'subscribers' => $context->data->parent->subscriberIds->toArray()
         ));
 
