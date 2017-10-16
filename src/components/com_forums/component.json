@@ -1,0 +1,18 @@
+{
+	"name": "Forums",
+	"description": "Forums component for Anahita Social Platform",
+	"type": "component",
+	"version": "1.0.0",
+	"homepage": "https://github.com/NicholasJohn16/forums",
+	"license": "GPLv3",
+	"copyright": [
+		"Copyright 2017 NicholasJohn16"
+	],
+	"authors": [
+		{
+			"name": "Nick Swinford",
+			"email": "nick@nicholasjohn16.com",
+			"homepage": "http://nicholasjohn16.com"
+		}
+	]
+}

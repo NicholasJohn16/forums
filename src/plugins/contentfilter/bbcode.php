@@ -1,11 +1,11 @@
 <?php
 
-$autoloader = include JPATH_VENDOR.'/autoload.php';
-$autoloader->add('Decoda', JPATH_LIBRARIES . '/decoda');
+$autoloader = include ANPATH_VENDOR.'/autoload.php';
+$autoloader->add('Decoda', ANPATH_LIBRARIES . '/decoda');
 
 class ComForumsBlock extends \Decoda\Filter\BlockFilter {
-    function __construct() {
 
+    function __construct() {
         $align = array(
             'align' => array(
                 'htmlTag' => 'div',

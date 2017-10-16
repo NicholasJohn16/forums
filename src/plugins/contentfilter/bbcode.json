@@ -1,0 +1,19 @@
+{
+	"name": "BBCode"
+	"description": "BBCode Content Filter for Forums",
+	"type": "plugin",
+	"group": "contentfilter",
+	"version": "1.0.0",
+	"license": "GPLv3",
+	"homepage": "https://github.com/NicholasJohn16/forums",
+	"authors": [
+		{
+			"name": "Nick Swinford",
+			"email": "nick@nicholasjohn16.com",
+			"homepage": "http://nicholasjohn16.com"
+		}
+	],
+	"copyright": [
+		"Copyright 2017 NicholasJohn16"
+	]
+}
