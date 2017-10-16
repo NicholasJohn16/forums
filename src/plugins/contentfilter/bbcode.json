@@ -1,5 +1,5 @@
 {
-	"name": "BBCode"
+	"name": "BBCode",
 	"description": "BBCode Content Filter for Forums",
 	"type": "plugin",
 	"group": "contentfilter",
