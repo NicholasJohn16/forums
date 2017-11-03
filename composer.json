@@ -1,4 +1,11 @@
 {   
+    "name"  : "nicholasjohn16/forums",
     "type"  : "anahita-extension",
-    "name"  : "nicholasjohn16/forums"
+    "description": "Forums for Anahita Social Platform",
+    "keywords": ["forum", "forums", "social"],
+    "homepage": "https://github.com/NicholasJohn16/forums",
+    "require": {
+    	"anahita/anahita": "^4.3.0",
+    	"mjohnson/decoda": "^6.7.1"
+    }
 }
