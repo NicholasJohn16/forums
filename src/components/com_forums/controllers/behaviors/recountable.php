@@ -1,6 +1,6 @@
 <?php
 
-class ComForumsControllerBehaviorRecountable extends KControllerBehaviorAbstract
+class ComForumsControllerBehaviorRecountable extends AnControllerBehaviorAbstract
 {
 
 	public function _actionRecount($context)

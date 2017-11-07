@@ -1,6 +1,6 @@
 <?php 
 
-class ComForumsControllerBehaviorLockable extends KControllerBehaviorAbstract
+class ComForumsControllerBehaviorLockable extends AnControllerBehaviorAbstract
 {
 
 	public function _actionLock($context)

@@ -1,7 +1,7 @@
 <?php
 
 
-class ComForumsControllerBehaviorRepliable extends KControllerBehaviorAbstract
+class ComForumsControllerBehaviorRepliable extends AnControllerBehaviorAbstract
 {
 
     protected function _beforeControllerGet($context)
