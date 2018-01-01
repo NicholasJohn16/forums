@@ -54,7 +54,7 @@ class PlgContentfilterBbcode extends PlgContentfilterAbstract
 	protected function _initialize(KConfig $config)
     {
         $config->append(array(
-            'priority' => KCommand::PRIORITY_LOW,
+            'priority' => KCommand::PRIORITY_NORMAL,
         ));
 
         parent::_initialize($config);
