@@ -34,14 +34,15 @@ class ComForumsDomainEntityForum extends ComBaseDomainEntityNode {
     }
 
     public function getNewCount() {
-        // $loginDate = get_viewer()->getLastLoginDate()->serialize();
+        $id = get_viewer()->guest() ? 0 : get_viewer()->id;
+        
         return $this->threads
                     ->getQuery()
                     // ->select('count(id)')
                     // ->where('last_comment_on', '>', $loginDate)
                     ->where('enabled', '=', 1)
                     ->clause()
-                    ->where('FIND_IN_SET('.get_viewer()->id.',new_notification_ids)', '=', 0)
+                    ->where('FIND_IN_SET('.$id.',new_notification_ids)', '=', 0)
                     ->where('new_notification_ids','IS',NULL, 'OR')
                     ->getParent()
                     ->where('DATEDIFF(NOW(), created_on)', '<', '7')

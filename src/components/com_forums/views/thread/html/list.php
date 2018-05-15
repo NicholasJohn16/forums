@@ -13,7 +13,7 @@
     <div class="media-body span6">
         <h4 class="media-heading">
           <a href="<?= @route($thread->getURL()) ?>">
-            <?php echo $locked . $thread->name ?>
+            <?= $thread->name . ' ' . $locked ?>
             <?php if($thread->isUnread()): ?>
                 <span class="label label-success"><?= @text('COM-FORUMS-THREAD-NEW') ?></span>
             <?php endif; ?>

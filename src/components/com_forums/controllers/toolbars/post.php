@@ -4,7 +4,7 @@ class ComForumsControllerToolbarPost extends ComBaseControllerToolbarDefault {
 
     public function addToolbarCommands() {
         $entity = $this->getController()->getItem();
-        $locked = $entity->parent->locked || $entity->parent->parent->locked;
+        // $locked = $entity->parent->locked || $entity->parent->parent->locked;
 
         if($entity->authorize('vote')) {
             $this->addCommand('vote');
@@ -18,7 +18,7 @@ class ComForumsControllerToolbarPost extends ComBaseControllerToolbarDefault {
                 ->icon('thumbs-down');
         }
 
-        if($entity->authorize('edit') && !$locked) {
+        if($entity->authorize('edit')) {
             $this->addCommand('edit');
 
             $this->getCommand('edit')
@@ -26,7 +26,7 @@ class ComForumsControllerToolbarPost extends ComBaseControllerToolbarDefault {
                 ->icon('edit');
         }
 
-        if($entity->authorize('add') && !$locked) {
+        if($entity->authorize('add')) {
             $this->addCommand('reply');
             $this->addCommand('quote');
 
@@ -34,7 +34,7 @@ class ComForumsControllerToolbarPost extends ComBaseControllerToolbarDefault {
             $this->addCommand('quickquote');
         }
 
-        if($entity->authorize('enable') && !$locked) {
+        if($entity->authorize('enable')) {
             $this->addCommand('enable');
 
             $label = $entity->enabled ? 'COM-FORUMS-POST-DELETE' : 'COM-FORUMS-POST-RESTORE';

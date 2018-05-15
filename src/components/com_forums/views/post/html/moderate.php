@@ -1,26 +1,22 @@
 <?php defined('KOOWA') or die('Restricted Access'); ?>
 
-<?php 
-	$document =& JFactory::getDocument();
-	$document->addScriptDeclaration("
+<script>
+	$(document).ready(function(){
 		
-		$(document).ready(function(){
+		$('#tid').on('change', function(){
 			
-			$('#tid').on('change', function(){
-				
-				if($('#tid').val() === '-1') {
-					$('#pid input').val(null);
-					$('#pid').removeClass('hidden');
-				} else {
-					$('#pid input').val($('#tid').val());
-					$('#pid').addClass('hidden');
-				}
-			});
-
+			if($('#tid').val() === '-1') {
+				$('#pid input').val(null);
+				$('#pid').removeClass('hidden');
+			} else {
+				$('#pid input').val($('#tid').val());
+				$('#pid').addClass('hidden');
+			}
 		});
 
-	");
-?>
+		console.log('it works!');
+	});
+</script>
 
 <h1><?= @text('COM-FORUMS-POST-MODERATE-POST') ?></h1>
 

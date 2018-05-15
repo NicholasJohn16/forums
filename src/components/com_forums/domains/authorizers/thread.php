@@ -38,6 +38,10 @@ class ComForumsDomainAuthorizerThread extends LibBaseDomainAuthorizerDefault
 	protected function _authorizeReply($context) {
 		$locked = $this->_entity->locked || $this->_entity->parent->locked;
 
+		if($this->_viewer->admin()) {
+			return true;
+		}
+
 		if(!$this->_viewer->guest() && !$locked) {
 			return true;
 		}

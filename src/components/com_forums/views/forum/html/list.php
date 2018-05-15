@@ -15,7 +15,7 @@
     <div class="media-body span6">
         <h4 class="media-heading">
             <a href="<?= @route($forum->getURL()) ?>">
-                <?php echo $locked . $forum->name; ?>
+                <?= $locked . $forum->name; ?>
             </a>
             <?php if($newCount = $forum->getNewCount()): ?>
                 <span class="label label-success"><?= sprintf(@text('COM-FORUMS-FORUM-NEW-COUNT'), $newCount) ?></span>

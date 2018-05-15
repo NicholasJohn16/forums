@@ -3,7 +3,7 @@
 $autoloader = include ANPATH_VENDOR.'/autoload.php';
 $autoloader->add('Decoda', ANPATH_LIBRARIES . '/decoda');
 
-class ComForumsTemplateHelper extends KTemplateHelperAbstract {
+class ComForumsTemplateHelper extends LibBaseTemplateHelperAbstract {
 
     public $files = ["award",
                     "bell",

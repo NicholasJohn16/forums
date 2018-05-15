@@ -5,12 +5,13 @@ class ComForumsDomainAuthorizerPost extends LibBaseDomainAuthorizerDefault
 
 
 	protected function _authorizeEdit($context) {
+		$locked = $this->_entity->parent->locked || $this->_entity->parent->parent->locked;
 
 		if($this->_viewer->admin()) {
 			return true;
 		}
 
-		if($this->_viewer->eql($this->_entity->author)) {
+		if($this->_viewer->eql($this->_entity->author) && !$locked) {
 			return true;
 		}
 	
@@ -27,8 +28,11 @@ class ComForumsDomainAuthorizerPost extends LibBaseDomainAuthorizerDefault
 	}
 
 	protected function _authorizeAdd($context) {
-
 		$locked = $this->_entity->parent->locked || $this->_entity->parent->parent->locked;
+
+		if($this->_viewer->admin()) {
+			return true;
+		}
 
 		if(!$this->_viewer->guest() && !$locked) {
 			return true;

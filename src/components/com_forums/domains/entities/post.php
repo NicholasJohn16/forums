@@ -91,7 +91,7 @@ class ComForumsDomainEntityPost extends ComBaseDomainEntityNode {
     public function isUnread()
     {
         $sevenDays = 86400 * 7;
-        $diff = $this->creationTime->compare(new KDate()) * -1;
+        $diff = $this->creationTime->compare(new AnDate()) * -1;
 
         return !$this->newNotificationIds->offsetExists(get_viewer()->id) && ($diff < $sevenDays);
     }
