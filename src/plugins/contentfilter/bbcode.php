@@ -78,7 +78,7 @@ class PlgContentfilterBbcode extends PlgContentfilterAbstract
         $decoda->addFilter(new \Decoda\Filter\TableFilter());
         $decoda->addFilter(new ComForumsBlock);
     
-        $decoda->addHook(new \Decoda\Hook\ClickableHook());
+        //$decoda->addHook(new \Decoda\Hook\ClickableHook());
 
         $parsed = $decoda->parse();
         $html = str_replace('<br />', '', $parsed);
