@@ -37,7 +37,7 @@ class ComForumsDomainEntityPost extends ComBaseDomainEntityNode {
         return $this->parent->getURL().'&reply='.$this->id;
     }
 
-    protected function _afterEntityInsert(KCommandContext $context)
+    protected function _afterEntityInsert(AnCommandContext $context)
     {
         $thread = $this->parent;
         $forum = $thread->parent;
@@ -72,7 +72,7 @@ class ComForumsDomainEntityPost extends ComBaseDomainEntityNode {
         }
     }
 
-    protected function _afterEntityDelete(KCommandContext $context)
+    protected function _afterEntityDelete(AnCommandContext $context)
     {
         $this->parent->parent->decrementPostCount();
         $this->parent->parent->resetLastReply();
