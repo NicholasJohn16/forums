@@ -2,7 +2,7 @@
 
 class ComForumsControllerToolbarActorbar extends ComBaseControllerToolbarActorbar
 {
-	// public function onBeforeControllerGet(KEvent $event)
+	// public function onBeforeControllerGet(AnEvent $event)
 	// {
 	// 	$actor = get_viewer();
 	// 	$this->getController()->actorbar = $this;

@@ -3,7 +3,7 @@
 class ComForumsControllerToolbarMenubar extends ComBaseControllerToolbarMenubar
 {
 
-	public function onBeforeControllerGet(KEvent $event)
+	public function onBeforeControllerGet(AnEvent $event)
 	{
 		$actor = get_viewer();
 		$controller = $this->getController();

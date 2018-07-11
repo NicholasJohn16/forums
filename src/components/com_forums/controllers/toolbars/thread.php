@@ -2,7 +2,7 @@
 
 class ComForumsControllerToolbarThread extends ComBaseControllerToolbarDefault {
 
-    public function onBeforeControllerGet(KEvent $event) {
+    public function onBeforeControllerGet(AnEvent $event) {
         $this->getController()->toolbar = $this;
     }
 
