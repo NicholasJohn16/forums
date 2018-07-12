@@ -10,7 +10,7 @@ class ComForumsControllerBehaviorRepliable extends AnControllerBehaviorAbstract
             $offset = $this->getItem()->getReplyOffset($this->reply);
         	$start = (int) ($offset / $this->limit) * $this->limit;
 
-        	$url = KRequest::url();
+        	$url = AnRequest::url();
         	$query = $url->getQuery(true);
 
         	if($this->start != $start) {
