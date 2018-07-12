@@ -3,7 +3,7 @@
 <h1><?= @text('COM-FORUMS-THREAD-MODERATE-THREAD') ?></h1>
 
 <?php 
-	$document = JFactory::getDocument();
+	$document = @service('anahita:document');
 	$document->addScriptDeclaration("
 		$(document).ready(function(){
 			$('#tid').on('change', function(){
