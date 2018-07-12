@@ -97,13 +97,18 @@ class ComForumsTemplateHelper extends LibBaseTemplateHelperAbstract {
                     "wallet",
                     "watermelon"];
 
-    public function parentForum($category) {
+    public function parentForum($category, $attributes = array()) {
         $html = $this->_template->getHelper('html');
         $parent = $category->parent;
         $options = array();
+        $attributes = new KConfig($attributes);
+
+        $attributes->append(array(
+            'class' => 'input-xlarge'
+        ));
         
         if($category->id) {
-            $forums = $this->getService('repos://site/forums.forum')                    
+            $forums = $this->getService('repos://site/forums.forum')
                     ->getQuery()
                     // ->where('id','!=',$forum->id)
                     ->clause()
@@ -125,16 +130,21 @@ class ComForumsTemplateHelper extends LibBaseTemplateHelperAbstract {
             $options[$forum->id] = $forum->title;
         }
 
-        return $html->select('pid', array('options' => $options, 'selected' => $parent ? $parent->id : null))->class('input-xlarge');
+        return $html->select('pid', array('options' => $options, 'selected' => $parent ? $parent->id : null), $attributes);
     }
 
-    public function parentCategory($forum) {
+    public function parentCategory($forum, $attributes = array()) {
         $html = $this->_template->getHelper('html');
         $parent = $forum->parent;
         $options = array();
+        $attributes = new KConfig($attributes);
+
+        $attributes->append(array(
+            'class' => 'input-xlarge'
+        ));
         
         if($forum->id) {
-            $categories = $this->getService('repos://site/forums.category')                    
+            $categories = $this->getService('repos://site/forums.category')
                     ->getQuery()
                     // ->where('id','!=',$forum->id)
                     ->clause()
@@ -156,13 +166,14 @@ class ComForumsTemplateHelper extends LibBaseTemplateHelperAbstract {
             $options[$category->id] = $category->title;
         }
 
-        return $html->select('pid', array('options' => $options, 'selected' => $parent ? $parent->id : null))->class('input-xlarge');   
+        return $html->select('pid', array('options' => $options, 'selected' => $parent ? $parent->id : null), $attributes);
     }
 
-    public function forums($thread)
+    public function forums($thread, $attributes = array())
     {
         $html = $this->_template->getHelper('html');
         $options = array();
+        $attributes = new KConfig($attributes);
 
         $categories = $this->getService('repos://site/forums.category')
                     ->getQuery()
@@ -175,14 +186,18 @@ class ComForumsTemplateHelper extends LibBaseTemplateHelperAbstract {
             }
         }
 
-        return $html->select('pid', array('options' => $options, 'selected' => $thread->pid));
+        return $html->select('pid', array('options' => $options, 'selected' => $thread->pid), $attributes);
     }
 
-    public function threads($thread, $createNew = true)
+    public function threads($thread, $createNew = true, $attributes = array())
     {
-
         $html = $this->_template->getHelper('html');
         $options = array();
+        $attributes = new KConfig($attributes);
+
+        $attributes->append(array(
+            'class' => 'input-xlarge'
+        ));
 
         $entities = $this->getService('repos://site/forums.thread')
             ->getQuery()
@@ -207,7 +222,7 @@ class ComForumsTemplateHelper extends LibBaseTemplateHelperAbstract {
         }
         $parameters['options'] = $options;
 
-        return $html->select('tid', $parameters)->class('input-xlarge');
+        return $html->select('tid', $parameters, $attributes);
     }
 
     public function getThreadIcons($currentIcon = false) {
