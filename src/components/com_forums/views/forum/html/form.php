@@ -39,7 +39,7 @@
         <?php 
         $options = new KConfig(array(
                 LibBaseDomainBehaviorPrivatable::GUEST =>   translate('LIB-AN-PRIVACYLABEL-PUBLIC'),
-                LibBaseDomainBehaviorPrivatable::REG =>     translate('LIB-AN-PRIVACYLABEL-REGISTERED'),
+                LibBaseDomainBehaviorPrivatable::REG =>     translate('LIB-AN-PRIVACYLABEL-REG'),
                 // LibBaseDomainBehaviorPrivatable::SPECIAL => translate('LIB-AN-PRIVACYLABEL-SPECIAL'),
                 LibBaseDomainBehaviorPrivatable::ADMIN =>   translate('LIB-AN-PRIVACYLABEL-ADMIN')
             ));
