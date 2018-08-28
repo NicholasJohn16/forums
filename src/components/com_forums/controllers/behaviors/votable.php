@@ -16,7 +16,7 @@ class ComForumsControllerBehaviorVotable extends ComBaseControllerBehaviorVotabl
 
 		// parent::_actionVote($context);
 
-		$context->response->status = KHttpResponse::CREATED;
+		$context->response->status = AnHttpResponse::CREATED;
 
         $this->getItem()->voteup(get_viewer());
 

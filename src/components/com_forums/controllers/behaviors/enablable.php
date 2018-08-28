@@ -15,10 +15,10 @@ class ComForumsControllerBehaviorEnablable extends ComBaseControllerBehaviorEnab
 			$viewer = get_viewer();
 
 			 if($viewer->admin()) {
-			 	$context->response->status = KHttpResponse::RESET_CONTENT;
+			 	$context->response->status = AnHttpResponse::RESET_CONTENT;
 	        	return $entity;
 	        } else {
-	        	$context->response->status = KHttpResponse::NO_CONTENT;
+	        	$context->response->status = AnHttpResponse::NO_CONTENT;
 	        }
 
 	    }
