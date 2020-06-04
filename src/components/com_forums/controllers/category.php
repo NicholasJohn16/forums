@@ -30,7 +30,7 @@ class ComForumsControllerCategory extends ComBaseControllerService {
 	}
 
 
-	public function redirect(AnCommandContext $context)
+	public function redirect(KCommandContext $context)
     {
         
         $category = $this->getItem();

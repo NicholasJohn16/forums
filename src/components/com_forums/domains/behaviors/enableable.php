@@ -14,7 +14,7 @@ class ComForumsDomainBehaviorEnableable extends LibBaseDomainBehaviorEnableable 
         parent::_initialize($config);
     }
 
-	protected function _beforeRepositoryFetch(AnCommandContext $context)
+	protected function _beforeRepositoryFetch(KCommandContext $context)
 	{
 
 		$viewer = get_viewer();

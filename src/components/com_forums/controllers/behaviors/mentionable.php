@@ -4,7 +4,7 @@
 class ComForumsControllerBehaviorMentionable extends ComPeopleControllerBehaviorMentionable
 {
 	
-	public function notifyMentioned(AnCommandContext $context)
+	public function notifyMentioned(KCommandContext $context)
     {
         $entity = $this->getItem();
         $subscribers = array();
