@@ -2,23 +2,19 @@
 
 <h1><?= @text('COM-FORUMS-THREAD-MODERATE-THREAD') ?></h1>
 
-<?php 
-	$document = @service('anahita:document');
-	$document->addScriptDeclaration("
-		$(document).ready(function(){
-			$('#tid').on('change', function(){
-				if($('#tid').val() === '-1') {
-					$('#target input').val(null);
-					$('#target').removeClass('hidden');
-				} else {
-					$('#target input').val($('#tid').val());
-					$('#target').addClass('hidden');
-				}
-			});
+<script>
+	$(document).ready(function(){
+		$('#tid').on('change', function(){
+			if($('#tid').val() === '-1') {
+				$('#target input').val(null);
+				$('#target').removeClass('hidden');
+			} else {
+				$('#target input').val($('#tid').val());
+				$('#target').addClass('hidden');
+			}
 		});
-	");
-?>
-
+	});
+</script>
 <form id="entity-form" method="post" action="<?= @route($thread->getURL()) ?>">
 
 	<fieldset>
