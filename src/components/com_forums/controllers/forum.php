@@ -67,7 +67,7 @@ class ComForumsControllerForum extends ComBaseControllerService {
         parent::_actionEdit($context);
     }
 
-    public function redirect(KCommandContext $context)
+    public function redirect(AnCommandContext $context)
     {
         
         $forum = $this->getItem();

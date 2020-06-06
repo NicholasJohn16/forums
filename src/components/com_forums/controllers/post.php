@@ -121,7 +121,7 @@
             $post = parent::_actionAdd($context);
         }
 
-        public function createStoryCallback(KCommandContext $context)
+        public function createStoryCallback(AnCommandContext $context)
         {
             $post = $this->getItem();
 

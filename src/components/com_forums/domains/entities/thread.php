@@ -36,11 +36,11 @@ class ComForumsDomainEntityThread extends ComBaseDomainEntityNode {
         return $this->getValue('postCount') - 1;
     }
     
-    protected function _afterEntityInsert(KCommandContext $context) {
+    protected function _afterEntityInsert(AnCommandContext $context) {
         $this->parent->incrementThreadCount();
     }
 
-    protected function _afterEntityDelete(KCommandContext $context) {
+    protected function _afterEntityDelete(AnCommandContext $context) {
         $this->parent->decrementThreadCount();
     }
 
