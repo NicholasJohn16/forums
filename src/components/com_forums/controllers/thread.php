@@ -95,6 +95,7 @@ class ComForumsControllerThread extends ComBaseControllerService
 
         $post->save();
 
+
         $this->setItem($post);
 
         $this->createStory(array(
@@ -112,6 +113,8 @@ class ComForumsControllerThread extends ComBaseControllerService
             'subscribers' => $context->data->parent->subscriberIds->toArray()
         ));
 
+        dispatch_plugin('forums.onAfterSaveThread', array('data' => $post));
+        
         $this->getResponse()->setRedirect(route($thread->getURL()));
     }
 
