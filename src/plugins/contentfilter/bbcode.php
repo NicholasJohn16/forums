@@ -1,7 +1,7 @@
 <?php
 
 $autoloader = include ANPATH_VENDOR.'/autoload.php';
-$autoloader->add('Decoda', ANPATH_LIBRARIES . '/decoda');
+$autoloader->add('Decoda', ANPATH_VENDOR . '/mjohnson/decoda');
 
 class ComForumsBlock extends \Decoda\Filter\BlockFilter {
 
