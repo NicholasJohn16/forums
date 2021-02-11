@@ -3,16 +3,16 @@
 <?php $commands = $toolbar->getCommands(); ?>
 
 <div class="btn-toolbar clearfix">
-    <?php if ($new = $commands->extract('new')) :?>
-         <?= @html('tag', 'a', $new->label, $new->getAttributes())->class('btn btn-primary') ?>
+    <?php if ($locked = $commands->extract('locked')) :?>
+        <?= @html('tag', 'span', $locked->label, $locked->getAttributes()) ?>
     <?php endif;?>
 
-    <?php if ($locked = $commands->extract('locked')) :?>
-         <?= @html('tag', 'span', $locked->label, $locked->getAttributes()) ?>
+    <?php if ($reply = $commands->extract('reply')) :?>
+        <?= @html('tag', 'a', $reply->label, $reply->getAttributes())->class('btn btn-primary') ?>
     <?php endif;?>
 
     <?php if($subscribe = $commands->extract('subscribe')): ?>
-		    <?= @html('tag', 'a', $subscribe->label, $subscribe->getAttributes())->class('btn btn-default') ?>
+		<?= @html('tag', 'a', $subscribe->label, $subscribe->getAttributes())->class('btn btn-default') ?>
     <?php endif; ?>
 
     <?php if($unsubscribe = $commands->extract('unsubscribe')): ?>

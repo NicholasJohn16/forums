@@ -46,7 +46,7 @@ class ComForumsDomainAuthorizerThread extends LibBaseDomainAuthorizerDefault
 			return true;
 		}
 		
-		return false;	
+		return false;
 	}
 
 	protected function _authorizeLock($context) {

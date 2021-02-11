@@ -10,15 +10,12 @@ class ComForumsControllerToolbarThread extends ComBaseControllerToolbarDefault {
     {
         $entity = $this->getController()->getItem();
 
-        if($entity 
-            && $entity->authorize('add') 
-            && !$entity->locked 
-            && !$entity->parent->locked) {
-            $this->addCommand('new');
-        }
-
         if($entity && ($entity->locked || $entity->parent->locked)) {
           $this->addCommand('locked');
+        }
+
+        if($entity && $entity->authorize('reply') ) {
+            $this->addCommand('reply');
         }
 
         if($entity && ($entity->authorize('subscribe') || $entity->subscribed(get_viewer()))) {
@@ -58,7 +55,7 @@ class ComForumsControllerToolbarThread extends ComBaseControllerToolbarDefault {
 
     }
 
-    public function _commandNew($command) {
+    public function _commandReply($command) {
         $entity = $this->getController()->getItem();
 
         $command->append(array(

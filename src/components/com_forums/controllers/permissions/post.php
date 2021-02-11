@@ -7,7 +7,7 @@ class ComForumsControllerPermissionPost extends LibBaseControllerPermissionDefau
 		$entity = $this->_mixer;
 		$locked = $entity->parent->locked || $entity->parent->parent->locked;
 
-		if(!$viewer->guest() && !$locked) {
+		if($viewer->admin() || !$viewer->guest() && !$locked) {
 			return true;
 		}
 
