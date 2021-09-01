@@ -7,7 +7,7 @@
 	see: http://stackoverflow.com/a/17206675/1903619
 */
 
-.breadcrumb {
+/* .breadcrumb {
   padding: 8px 15px;
   margin: 0 0 19px;
   list-style: none;
@@ -25,7 +25,8 @@
 }
 .breadcrumb > .active {
   color: #999999;
-}
+} */
+
 /*.entity-portrait-square {
 	float: none !important;
 }*/
