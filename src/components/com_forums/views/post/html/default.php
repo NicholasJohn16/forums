@@ -4,6 +4,12 @@
 <?php $disabled = $post->enabled ? '' : 'forum-thread-disabled'; ?>
 <?php $coverStyle = ($post->author && $post->author->coverSet()) ? "background-image:url('".$post->author->getCoverURL('medium')."')" : ''; ?>
 
+
+<?php $settings = null; ?>
+<?php if ($post->author && $post->author->id): ?>
+    <?php $settings = @service('repos:forums.setting')->find(['person_id' => $post->author->id]) ?>
+<?php endif ?>
+
 <div class="row-fluid an-entity cid-<?= $post->id; ?>">
 
     <div class="forum-post-profile span3 ">
@@ -61,6 +67,12 @@
         <div class="entity-description">
             <?= @content($post->body, array('exclude' => 'link')) ?>
         </div>
+        <?php if ($settings && $settings->signature): ?>
+            <div class="entity-signature">
+                <hr>
+                <?= @content($settings->signature, ['exclude' => ['link', 'medium' ]]) ?>
+            </div>
+        <?php endif ?>
 
         <?php if($showToolbar): ?>
             <div class="entity-actions">
