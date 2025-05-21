@@ -9,9 +9,14 @@ class ComForumsControllerToolbarThread extends ComBaseControllerToolbarDefault {
     public function addToolbarCommands()
     {
         $entity = $this->getController()->getItem();
+        $applicationForumId = (int) get_config_value('forums.application_forum', 0);
 
         if($entity && ($entity->locked || $entity->parent->locked)) {
           $this->addCommand('locked');
+        }
+
+        if($entity && $entity->parent->id === $applicationForumId && $entity->authorize('edit')) {
+            $this->addCommand('markProcessed');
         }
 
         if($entity && $entity->authorize('reply') ) {
@@ -99,6 +104,15 @@ class ComForumsControllerToolbarThread extends ComBaseControllerToolbarDefault {
 
         $command->append(array('label' => translate('COM-FORUMS-THREAD-MODERATE')))
             ->href(route($entity->getURL().'&layout=moderate'));
+    }
+
+    public function _commandMarkProcessed($command) {
+        error_log('markProcessed');
+        $entity = $this->getController()->getItem();
+
+        $command->append(array('label' => translate('COM-FORUMS-THREAD-PROCESSED')))
+            ->href(route($entity->getURL()))
+            ->setAttribute('data-action', 'processed');
     }
 
 }

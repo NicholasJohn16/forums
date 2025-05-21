@@ -1,0 +1,11 @@
+{
+    "fields": [
+        {
+            "name": "application_forum",
+            "type": "text",
+            "size": "60",
+            "default": "",
+            "label": "Start Here Forum ID"
+        }
+    ]
+}

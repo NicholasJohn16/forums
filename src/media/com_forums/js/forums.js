@@ -22,6 +22,25 @@
 
 		});
 
+		$('body').on('click', 'a[data-action="processed"]', function(evt) {
+			evt.preventDefault();
+			var btn = $(this);
+
+			$.ajax({
+				method: 'post',
+				url: btn.attr('href'),
+				data: {
+					action: 'processed'
+				},
+				beforeSend: function() {
+					btn.fadeTo('fast', 0.3).addClass('uiActivityIndicator');
+				},
+				success: function() {
+					location.reload();
+				}
+			});
+		});
+
 		$('body').on('click', 'a[data-action="lock"], a[data-action="unlock"]', function(evt) {
 			evt.preventDefault();
 			var btn = $(this);

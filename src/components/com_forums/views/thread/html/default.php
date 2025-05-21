@@ -11,7 +11,7 @@
 
 <?= @helper('ui.toolbar', array('toolbar' => $toolbar)) ?>
 
-<?php $editable = $thread->authorize('edit') ? 'editable' : '' ?>
+<?php $editable = $thread->authorize('edit') ? 'an-editable' : '' ?>
 
 <div class="an-entity <?= $editable ?>" data-url="<?= @route($thread->getURL()) ?>">
 	<div class="entity-description-wrapper">

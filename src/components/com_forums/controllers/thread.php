@@ -222,4 +222,17 @@ class ComForumsControllerThread extends ComBaseControllerService
         $this->getResponse()->setRedirect(route('index.php?' . $url));
     }
 
+    public function _actionProcessed($context)
+    {
+        $thread = $this->getItem();
+        // if first character is not a [ then add it
+        if($thread->title[0] !== '[') {
+            $newTitle = "[Processed] " . $thread->title;
+            $thread->title = substr($newTitle, 0, 255);
+            $thread->save();
+        }
+
+        $this->getResponse()->setRedirect(route($thread->getURL()));
+    }
+
 }
