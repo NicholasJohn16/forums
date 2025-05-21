@@ -107,7 +107,6 @@ class ComForumsControllerToolbarThread extends ComBaseControllerToolbarDefault {
     }
 
     public function _commandMarkProcessed($command) {
-        error_log('markProcessed');
         $entity = $this->getController()->getItem();
 
         $command->append(array('label' => translate('COM-FORUMS-THREAD-PROCESSED')))
